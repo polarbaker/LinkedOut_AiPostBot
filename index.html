@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinkedIn Post Generator - AI-Powered Content Creation</title>
+    <title>LinkedIn Post Generator - Enhanced Edition</title>
     <link rel="stylesheet" href="static/css/style.css">
     <link rel="stylesheet" href="static/css/improved-ui.css">
     <link rel="stylesheet" href="static/css/microinteractions.css">
@@ -11,50 +11,44 @@
     <link rel="stylesheet" href="static/css/accessibility.css">
 </head>
 <body>
-    <div class="app-container">
-        <!-- Header -->
-        <header class="app-header">
+    <header class="header">
+        <div class="container">
+            <div class="header__content flex items-center justify-between">
+                <div class="header__brand">
+                    <h1 class="header__title">🚀 LinkedIn Post Generator</h1>
+                    <p class="header__subtitle">Transform News & Insights into Engaging LinkedIn Posts</p>
+                </div>
+                <nav class="header__nav">
+                    <button class="btn btn--outline" id="settingsBtn">Settings</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Dashboard Section -->
+        <!-- Dashboard Section -->
+        <section class="dashboard" id="dashboard">
             <div class="container">
-                <div class="flex items-center justify-between">
-                    <div class="logo-section">
-                        <h1 class="logo-title">PostCraft AI</h1>
-                        <span class="logo-subtitle">LinkedIn Content Generator</span>
-                    </div>
-                    <div class="header-actions flex items-center gap-16">
-                        <button class="theme-toggle btn btn--outline btn--sm" id="themeToggle">
-                            <span id="themeIcon">🌙</span>
-                        </button>
-                        <div class="user-profile flex items-center gap-8">
-                            <div class="user-avatar">👤</div>
-                            <span class="user-name">Marketing Pro</span>
+                <div class="hero">
+                    <h2 class="hero__title">Create Professional LinkedIn Posts in Seconds</h2>
+                    <p class="hero__description">Stay ahead with the latest industry news, transformed into engaging LinkedIn content that drives professional conversations.</p>
+                    
+                    <div class="stats flex gap-16">
+                        <div class="stat">
+                            <div class="stat__number">24</div>
+                            <div class="stat__label">Recent Articles</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat__number">6</div>
+                            <div class="stat__label">Post Styles</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat__number">20+</div>
+                            <div class="stat__label">Smart Hashtags</div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </header>
-
-        <!-- Navigation -->
-        <nav class="app-nav">
-            <div class="container">
-                <div class="nav-tabs flex">
-                    <button class="nav-tab active" data-tab="voice-analysis" aria-controls="voice-analysis" role="tab" aria-selected="true">📝 Voice Analysis</button>
-                    <button class="nav-tab" data-tab="monitoring" aria-controls="monitoring" role="tab" aria-selected="false">🌐 Website Monitoring</button>
-                    <button class="nav-tab" data-tab="content-generation" aria-controls="content-generation" role="tab" aria-selected="false">🚀 Content Generation</button>
-                    <button class="nav-tab" data-tab="approval-queue" aria-controls="approval-queue" role="tab" aria-selected="false">✅ Approval Queue</button>
-                    <button class="nav-tab" data-tab="analytics" aria-controls="analytics" role="tab" aria-selected="false">📊 Analytics</button>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="app-main">
-            <div class="container">
-                <!-- Voice Analysis Section -->
-                <section id="voice-analysis" class="tab-content active">
-                    <div class="section-header">
-                        <h2>Voice Analysis & Style Profile</h2>
-                        <p class="section-description">Upload your previous LinkedIn posts to analyze your unique writing style and tone</p>
-                    </div>
 
                     <div class="voice-analysis-grid">
                         <div class="voice-input-section">
@@ -618,5 +612,35 @@
     <script src="static/js/accessibility.js"></script>
     <script src="static/js/notification-system.js"></script>
     <script src="static/js/integration.js"></script>
+    <!-- Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-btn active" data-section="dashboard">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Dashboard</span>
+        </button>
+        <button class="nav-btn" data-section="content-hub">
+            <span class="nav-icon">📰</span>
+            <span class="nav-label">Content</span>
+        </button>
+        <button class="nav-btn" data-section="post-studio">
+            <span class="nav-icon">✏️</span>
+            <span class="nav-label">Generate</span>
+        </button>
+        <button class="nav-btn" data-section="analytics">
+            <span class="nav-icon">📊</span>
+            <span class="nav-label">Analytics</span>
+        </button>
+        <button class="nav-btn" data-section="settings">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Settings</span>
+        </button>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div class="toast hidden" id="toast">
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <script src="static/js/app.js"></script>
 </body>
 </html>

@@ -315,34 +315,1830 @@
                 
                 <!-- Other tabs would go here, similar structure -->
                 <section id="content-hub" class="dashboard-tab" role="tabpanel" aria-labelledby="content-hub-tab">
-                    <!-- Content Hub tab content -->
                     <div class="dashboard-header">
                         <div class="dashboard-title">
                             <div class="dashboard-title-icon">📰</div>
                             <h2>Content Hub</h2>
                         </div>
                         <div class="dashboard-actions">
-                            <button class="btn btn--outline btn--sm">
+                            <div class="search-container">
+                                <input type="text" placeholder="Search articles..." class="search-input" id="contentSearchInput">
+                                <button class="search-btn"><span class="icon">🔍</span></button>
+                            </div>
+                            <button class="btn btn--outline btn--sm" id="filterArticlesBtn">
                                 <span class="icon">🔍</span> Filter
                             </button>
-                            <button class="btn btn--primary btn--sm">
+                            <button class="btn btn--primary btn--sm" id="refreshArticlesBtn">
                                 <span class="icon">🔄</span> Refresh Articles
                             </button>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-content">
+                        <!-- Filter panel -->
+                        <div class="filter-panel" id="contentFilterPanel">
+                            <div class="filter-header">
+                                <h3>Filter Articles</h3>
+                                <button class="btn--icon close-filter">✕</button>
+                            </div>
+                            <div class="filter-body">
+                                <div class="filter-group">
+                                    <h4>Sources</h4>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" checked> Industry News
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" checked> Tech Blogs
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" checked> Leadership Publications
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox"> Company Updates
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filter-group">
+                                    <h4>Date Range</h4>
+                                    <div class="range-selector">
+                                        <select class="form-select">
+                                            <option value="today">Today</option>
+                                            <option value="week" selected>Past Week</option>
+                                            <option value="month">Past Month</option>
+                                            <option value="custom">Custom Range</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="filter-group">
+                                    <h4>Categories</h4>
+                                    <div class="tag-selector">
+                                        <span class="tag selected">Technology</span>
+                                        <span class="tag selected">Leadership</span>
+                                        <span class="tag">Marketing</span>
+                                        <span class="tag">Finance</span>
+                                        <span class="tag">Career</span>
+                                        <span class="tag">Innovation</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-footer">
+                                <button class="btn btn--outline btn--sm">Reset</button>
+                                <button class="btn btn--primary btn--sm">Apply Filters</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Content tabs -->
+                        <div class="content-tabs">
+                            <div class="tab-header">
+                                <button class="tab-btn active" data-content-tab="latest">Latest</button>
+                                <button class="tab-btn" data-content-tab="trending">Trending</button>
+                                <button class="tab-btn" data-content-tab="saved">Saved</button>
+                                <button class="tab-btn" data-content-tab="used">Used in Posts</button>
+                            </div>
+                            <div class="tab-content">
+                                <!-- Latest articles grid -->
+                                <div class="article-grid">
+                                    <!-- Article card 1 -->
+                                    <div class="article-card">
+                                        <div class="article-image" style="background-image: url('https://placehold.co/600x400/e9f2ff/0a66c2')">
+                                            <div class="article-source">TechCrunch</div>
+                                        </div>
+                                        <div class="article-content">
+                                            <div class="article-meta">
+                                                <span class="article-date">June 6, 2025</span>
+                                                <span class="article-category">Technology</span>
+                                            </div>
+                                            <h3 class="article-title">AI Advancements Reshaping Enterprise Software Development</h3>
+                                            <p class="article-excerpt">How artificial intelligence is transforming the way companies build, maintain and deploy business applications.</p>
+                                            <div class="article-actions">
+                                                <button class="btn btn--sm btn--primary">Create Post</button>
+                                                <button class="btn btn--sm btn--outline"><span class="icon">💾</span></button>
+                                                <button class="btn btn--sm btn--outline"><span class="icon">👁️</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Article card 2 -->
+                                    <div class="article-card">
+                                        <div class="article-image" style="background-image: url('https://placehold.co/600x400/f0f7ff/0a66c2')">
+                                            <div class="article-source">Harvard Business Review</div>
+                                        </div>
+                                        <div class="article-content">
+                                            <div class="article-meta">
+                                                <span class="article-date">June 5, 2025</span>
+                                                <span class="article-category">Leadership</span>
+                                            </div>
+                                            <h3 class="article-title">The Future of Hybrid Work: New Research Findings</h3>
+                                            <p class="article-excerpt">Recent studies reveal how companies are balancing remote flexibility with in-office collaboration.</p>
+                                            <div class="article-actions">
+                                                <button class="btn btn--sm btn--primary">Create Post</button>
+                                                <button class="btn btn--sm btn--outline"><span class="icon">💾</span></button>
+                                                <button class="btn btn--sm btn--outline"><span class="icon">👁️</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Article card 3 -->
+                                    <div class="article-card">
+                                        <div class="article-image" style="background-image: url('https://placehold.co/600x400/e1f5fe/0a66c2')">
+                                            <div class="article-source">McKinsey Insights</div>
+                                        </div>
+                                        <div class="article-content">
+                                            <div class="article-meta">
+                                                <span class="article-date">June 4, 2025</span>
+                                                <span class="article-category">Strategy</span>
+                                            </div>
+                                            <h3 class="article-title">Digital Transformation in 2025: Beyond the Basics</h3>
+                                            <p class="article-excerpt">Companies are moving past initial digital transformation efforts to focus on deeper business model innovations.</p>
+                                            <div class="article-actions">
+                                                <button class="btn btn--sm btn--primary">Create Post</button>
+                                                <button class="btn btn--sm btn--outline"><span class="icon">💾</span></button>
+                                                <button class="btn btn--sm btn--outline"><span class="icon">👁️</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Article card 4 -->
+                                    <div class="article-card">
+                                        <div class="article-image" style="background-image: url('https://placehold.co/600x400/e8f5e9/0a66c2')">
+                                            <div class="article-source">Fast Company</div>
+                                        </div>
+                                        <div class="article-content">
+                                            <div class="article-meta">
+                                                <span class="article-date">June 3, 2025</span>
+                                                <span class="article-category">Innovation</span>
+                                            </div>
+                                            <h3 class="article-title">Sustainable Tech: The New Business Imperative</h3>
+                                            <p class="article-excerpt">How leading companies are integrating environmental sustainability into their technology roadmaps.</p>
+                                            <div class="article-actions">
+                                                <button class="btn btn--sm btn--primary">Create Post</button>
+                                                <button class="btn btn--sm btn--outline"><span class="icon">💾</span></button>
+                                                <button class="btn btn--sm btn--outline"><span class="icon">👁️</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="content-pagination">
+                                    <button class="pagination-btn" disabled><span class="icon">←</span></button>
+                                    <div class="pagination-numbers">
+                                        <button class="pagination-number active">1</button>
+                                        <button class="pagination-number">2</button>
+                                        <button class="pagination-number">3</button>
+                                        <span class="pagination-ellipsis">...</span>
+                                        <button class="pagination-number">12</button>
+                                    </div>
+                                    <button class="pagination-btn"><span class="icon">→</span></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
                 
                 <section id="post-studio" class="dashboard-tab" role="tabpanel" aria-labelledby="post-studio-tab">
-                    <!-- Post Studio tab content -->
                     <div class="dashboard-header">
                         <div class="dashboard-title">
                             <div class="dashboard-title-icon">✏️</div>
                             <h2>Post Studio</h2>
                         </div>
+                        <div class="dashboard-actions">
+                            <button class="btn btn--outline btn--sm" id="saveAsDraftBtn">
+                                <span class="icon">💾</span> Save Draft
+                            </button>
+                            <button class="btn btn--primary btn--sm" id="generatePostBtn">
+                                <span class="icon">✨</span> Generate New Post
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-content">
+                        <div class="post-studio-layout">
+                            <!-- Left panel: Content Generation -->
+                            <div class="post-generation-panel">
+                                <div class="panel-header">
+                                    <h3>Create your LinkedIn post</h3>
+                                    <div class="post-type-selector">
+                                        <button class="post-type-btn active" data-post-type="article-based">
+                                            <span class="icon">📰</span> Article-based
+                                        </button>
+                                        <button class="post-type-btn" data-post-type="original">
+                                            <span class="icon">💡</span> Original
+                                        </button>
+                                        <button class="post-type-btn" data-post-type="template">
+                                            <span class="icon">📋</span> Template
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Article selection for article-based posts -->
+                                <div class="post-source-section active" id="articleSourceSection">
+                                    <h4>Select an article as inspiration</h4>
+                                    <div class="selected-article">
+                                        <div class="article-preview">
+                                            <div class="article-preview-image" style="background-image: url('https://placehold.co/600x400/e9f2ff/0a66c2')"></div>
+                                            <div class="article-preview-content">
+                                                <h5>AI Advancements Reshaping Enterprise Software</h5>
+                                                <div class="article-preview-source">TechCrunch • June 6, 2025</div>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn--sm btn--outline" id="changeArticleBtn">Change article</button>
+                                    </div>
+                                    
+                                    <!-- Key points extraction -->
+                                    <div class="key-points-section">
+                                        <h4>Key points from this article</h4>
+                                        <div class="key-points-list">
+                                            <div class="key-point">
+                                                <input type="checkbox" id="kp1" checked>
+                                                <label for="kp1">AI is reducing development time by up to 40% for enterprise applications</label>
+                                            </div>
+                                            <div class="key-point">
+                                                <input type="checkbox" id="kp2" checked>
+                                                <label for="kp2">72% of enterprises are leveraging AI-powered coding assistants</label>
+                                            </div>
+                                            <div class="key-point">
+                                                <input type="checkbox" id="kp3">
+                                                <label for="kp3">Low-code platforms with AI capabilities are growing at 28% annually</label>
+                                            </div>
+                                            <div class="key-point">
+                                                <input type="checkbox" id="kp4" checked>
+                                                <label for="kp4">Top challenges include AI model training and data quality issues</label>
+                                            </div>
+                                            <div class="key-point">
+                                                <input type="checkbox" id="kp5">
+                                                <label for="kp5">Companies report 33% fewer bugs when using AI code review systems</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Original content source -->
+                                <div class="post-source-section" id="originalSourceSection">
+                                    <h4>Create an original post</h4>
+                                    <div class="topic-selector">
+                                        <input type="text" class="form-input" placeholder="Enter your topic or idea..." id="originalTopicInput">
+                                    </div>
+                                    
+                                    <div class="idea-prompts">
+                                        <h5>Need inspiration?</h5>
+                                        <div class="idea-prompt-list">
+                                            <div class="idea-prompt">
+                                                <span class="icon">💼</span> Share a recent professional achievement
+                                            </div>
+                                            <div class="idea-prompt">
+                                                <span class="icon">📚</span> Discuss a book that influenced your career
+                                            </div>
+                                            <div class="idea-prompt">
+                                                <span class="icon">🧩</span> Explain how you solved a difficult challenge
+                                            </div>
+                                            <div class="idea-prompt">
+                                                <span class="icon">🔍</span> Share insights from a recent industry event
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Template selection -->
+                                <div class="post-source-section" id="templateSourceSection">
+                                    <h4>Start with a template</h4>
+                                    <div class="template-grid">
+                                        <div class="template-card selected">
+                                            <div class="template-icon">🏆</div>
+                                            <h5>Achievement</h5>
+                                            <p>Share a recent accomplishment or milestone</p>
+                                        </div>
+                                        <div class="template-card">
+                                            <div class="template-icon">💡</div>
+                                            <h5>Insight</h5>
+                                            <p>Share a professional insight or lesson learned</p>
+                                        </div>
+                                        <div class="template-card">
+                                            <div class="template-icon">📈</div>
+                                            <h5>Trend Analysis</h5>
+                                            <p>Discuss an industry trend with your perspective</p>
+                                        </div>
+                                        <div class="template-card">
+                                            <div class="template-icon">👥</div>
+                                            <h5>Team Spotlight</h5>
+                                            <p>Highlight team achievements or collaboration</p>
+                                        </div>
+                                        <div class="template-card">
+                                            <div class="template-icon">🙏</div>
+                                            <h5>Gratitude</h5>
+                                            <p>Express appreciation for colleagues or mentors</p>
+                                        </div>
+                                        <div class="template-card">
+                                            <div class="template-icon">❓</div>
+                                            <h5>Question</h5>
+                                            <p>Ask an engaging question to spark conversation</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Post generation options -->
+                                <div class="generation-options">
+                                    <div class="option-group">
+                                        <h4>Tone & Style</h4>
+                                        <div class="option-pills">
+                                            <span class="option-pill active">Professional</span>
+                                            <span class="option-pill">Conversational</span>
+                                            <span class="option-pill">Thought-provoking</span>
+                                            <span class="option-pill">Educational</span>
+                                            <span class="option-pill">Inspirational</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="option-group">
+                                        <h4>Post Format</h4>
+                                        <div class="format-selector">
+                                            <label class="format-option">
+                                                <input type="radio" name="format" value="text-only" checked>
+                                                <span class="format-label">Text only</span>
+                                            </label>
+                                            <label class="format-option">
+                                                <input type="radio" name="format" value="bullet-points">
+                                                <span class="format-label">Bullet points</span>
+                                            </label>
+                                            <label class="format-option">
+                                                <input type="radio" name="format" value="storytelling">
+                                                <span class="format-label">Storytelling</span>
+                                            </label>
+                                            <label class="format-option">
+                                                <input type="radio" name="format" value="question-based">
+                                                <span class="format-label">Question-based</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="option-group">
+                                        <h4>Length</h4>
+                                        <div class="slider-container">
+                                            <input type="range" min="1" max="5" value="3" class="slider" id="postLengthSlider">
+                                            <div class="slider-labels">
+                                                <span>Brief</span>
+                                                <span>Medium</span>
+                                                <span>Detailed</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="primary-action">
+                                        <button class="btn btn--lg btn--primary btn--full" id="createPostBtn">
+                                            <span class="icon">✏️</span> Create LinkedIn Post
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Right panel: Preview & Edit -->
+                            <div class="post-preview-panel">
+                                <div class="panel-header">
+                                    <h3>Post Preview</h3>
+                                    <div class="preview-actions">
+                                        <button class="btn btn--sm btn--outline" id="regenerateBtn">
+                                            <span class="icon">🔄</span> Regenerate
+                                        </button>
+                                        <button class="btn btn--sm btn--outline" id="copyPostBtn">
+                                            <span class="icon">📋</span> Copy
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="linkedin-post-preview">
+                                    <div class="post-header">
+                                        <div class="post-author">
+                                            <div class="author-avatar">TB</div>
+                                            <div class="author-info">
+                                                <div class="author-name">Thomas Baker</div>
+                                                <div class="author-headline">Senior Software Engineer | AI Enthusiast</div>
+                                            </div>
+                                        </div>
+                                        <div class="post-time">Now</div>
+                                    </div>
+                                    
+                                    <div class="post-body" contenteditable="true">
+                                        <p>Fascinating article from TechCrunch on how AI is reshaping enterprise software development. 🤖</p>
+                                        <p>The stats are eye-opening:</p>
+                                        <p>✅ AI reducing development time by 40%<br>
+                                        ✅ 72% of enterprises now using AI coding assistants<br>
+                                        ✅ 33% fewer bugs reported when using AI code reviews</p>
+                                        <p>As someone who's been integrating AI into our development workflows, I've seen firsthand how these tools can transform productivity while maintaining code quality.</p>
+                                        <p>The key challenge remains data quality for training these models. Garbage in, garbage out still applies, even with the most advanced AI.</p>
+                                        <p>What AI development tools have made the biggest impact in your organization?</p>
+                                        <p>#ArtificialIntelligence #SoftwareDevelopment #EnterpriseAI #TechTrends</p>
+                                    </div>
+                                    
+                                    <div class="post-engagement-preview">
+                                        <div class="engagement-metrics">
+                                            <span class="likes">0 likes</span>
+                                            <span class="comments">0 comments</span>
+                                        </div>
+                                        <div class="engagement-buttons">
+                                            <button class="engagement-btn">👍 Like</button>
+                                            <button class="engagement-btn">💬 Comment</button>
+                                            <button class="engagement-btn">🔄 Repost</button>
+                                            <button class="engagement-btn">📤 Send</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="post-options">
+                                    <div class="hashtag-suggestions">
+                                        <h4>Suggested Hashtags</h4>
+                                        <div class="hashtag-list">
+                                            <span class="hashtag selected">#ArtificialIntelligence</span>
+                                            <span class="hashtag selected">#SoftwareDevelopment</span>
+                                            <span class="hashtag selected">#EnterpriseAI</span>
+                                            <span class="hashtag selected">#TechTrends</span>
+                                            <span class="hashtag">#Innovation</span>
+                                            <span class="hashtag">#Future</span>
+                                            <span class="hashtag">#CodeQuality</span>
+                                            <span class="hashtag">#Developer</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="post-actions">
+                                        <button class="btn btn--outline" id="schedulePostBtn">
+                                            <span class="icon">📅</span> Schedule
+                                        </button>
+                                        <button class="btn btn--primary" id="publishPostBtn">
+                                            <span class="icon">🚀</span> Publish Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 
-                <!-- Additional tabs would follow the same pattern -->
+                <!-- Schedule Tab -->
+                <section id="schedule" class="dashboard-tab" role="tabpanel" aria-labelledby="schedule-tab">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <div class="dashboard-title-icon">📅</div>
+                            <h2>Content Schedule</h2>
+                        </div>
+                        <div class="dashboard-actions">
+                            <div class="date-selector">
+                                <button class="btn btn--icon">◀</button>
+                                <span class="current-month">June 2025</span>
+                                <button class="btn btn--icon">▶</button>
+                            </div>
+                            <div class="view-options">
+                                <button class="view-option active" data-view="month">Month</button>
+                                <button class="view-option" data-view="week">Week</button>
+                                <button class="view-option" data-view="list">List</button>
+                            </div>
+                            <button class="btn btn--primary btn--sm" id="scheduleNewPostBtn">
+                                <span class="icon">➕</span> Schedule Post
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-content">
+                        <!-- Calendar View -->
+                        <div class="calendar-container">
+                            <div class="calendar-header">
+                                <div class="weekday">Sunday</div>
+                                <div class="weekday">Monday</div>
+                                <div class="weekday">Tuesday</div>
+                                <div class="weekday">Wednesday</div>
+                                <div class="weekday">Thursday</div>
+                                <div class="weekday">Friday</div>
+                                <div class="weekday">Saturday</div>
+                            </div>
+                            
+                            <div class="calendar-body">
+                                <!-- Week 1 -->
+                                <div class="calendar-day inactive"><span class="day-number">26</span></div>
+                                <div class="calendar-day inactive"><span class="day-number">27</span></div>
+                                <div class="calendar-day inactive"><span class="day-number">28</span></div>
+                                <div class="calendar-day inactive"><span class="day-number">29</span></div>
+                                <div class="calendar-day inactive"><span class="day-number">30</span></div>
+                                <div class="calendar-day inactive"><span class="day-number">31</span></div>
+                                <div class="calendar-day"><span class="day-number">1</span></div>
+                                
+                                <!-- Week 2 -->
+                                <div class="calendar-day"><span class="day-number">2</span></div>
+                                <div class="calendar-day">
+                                    <span class="day-number">3</span>
+                                    <div class="calendar-event event-posted">
+                                        <div class="event-time">9:30 AM</div>
+                                        <div class="event-title">AI in Enterprise Software</div>
+                                    </div>
+                                </div>
+                                <div class="calendar-day"><span class="day-number">4</span></div>
+                                <div class="calendar-day"><span class="day-number">5</span></div>
+                                <div class="calendar-day">
+                                    <span class="day-number">6</span>
+                                    <div class="calendar-event event-scheduled">
+                                        <div class="event-time">11:00 AM</div>
+                                        <div class="event-title">Remote Work Trends</div>
+                                    </div>
+                                </div>
+                                <div class="calendar-day"><span class="day-number">7</span></div>
+                                <div class="calendar-day"><span class="day-number">8</span></div>
+                                
+                                <!-- Week 3 -->
+                                <div class="calendar-day today"><span class="day-number">9</span></div>
+                                <div class="calendar-day upcoming">
+                                    <span class="day-number">10</span>
+                                    <div class="calendar-event event-draft">
+                                        <div class="event-time">10:15 AM</div>
+                                        <div class="event-title">Leadership Insights</div>
+                                    </div>
+                                </div>
+                                <div class="calendar-day upcoming"><span class="day-number">11</span></div>
+                                <div class="calendar-day upcoming">
+                                    <span class="day-number">12</span>
+                                    <div class="calendar-event event-scheduled">
+                                        <div class="event-time">2:00 PM</div>
+                                        <div class="event-title">Digital Transformation</div>
+                                    </div>
+                                </div>
+                                <div class="calendar-day upcoming"><span class="day-number">13</span></div>
+                                <div class="calendar-day upcoming"><span class="day-number">14</span></div>
+                                <div class="calendar-day upcoming"><span class="day-number">15</span></div>
+                                
+                                <!-- Weeks 4-5 (truncated for brevity) -->
+                                <div class="calendar-day upcoming"><span class="day-number">16</span></div>
+                                <div class="calendar-day upcoming"><span class="day-number">17</span></div>
+                                <div class="calendar-day upcoming"><span class="day-number">18</span></div>
+                                <div class="calendar-day upcoming"><span class="day-number">19</span></div>
+                                <div class="calendar-day upcoming">
+                                    <span class="day-number">20</span>
+                                    <div class="calendar-event event-scheduled">
+                                        <div class="event-time">9:00 AM</div>
+                                        <div class="event-title">Innovation Series</div>
+                                    </div>
+                                </div>
+                                <div class="calendar-day upcoming"><span class="day-number">21</span></div>
+                                <div class="calendar-day upcoming"><span class="day-number">22</span></div>
+                                
+                                <!-- Remaining days -->
+                                <div class="calendar-day upcoming"><span class="day-number">23</span></div>
+                                <div class="calendar-day upcoming"><span class="day-number">24</span></div>
+                                <div class="calendar-day upcoming"><span class="day-number">25</span></div>
+                                <div class="calendar-day upcoming"><span class="day-number">26</span></div>
+                                <div class="calendar-day upcoming"><span class="day-number">27</span></div>
+                                <div class="calendar-day upcoming"><span class="day-number">28</span></div>
+                                <div class="calendar-day upcoming"><span class="day-number">29</span></div>
+                                
+                                <div class="calendar-day upcoming"><span class="day-number">30</span></div>
+                                <div class="calendar-day inactive"><span class="day-number">1</span></div>
+                                <div class="calendar-day inactive"><span class="day-number">2</span></div>
+                                <div class="calendar-day inactive"><span class="day-number">3</span></div>
+                                <div class="calendar-day inactive"><span class="day-number">4</span></div>
+                                <div class="calendar-day inactive"><span class="day-number">5</span></div>
+                                <div class="calendar-day inactive"><span class="day-number">6</span></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Upcoming Posts -->
+                        <div class="upcoming-posts-panel">
+                            <h3 class="panel-title">Upcoming Posts</h3>
+                            <div class="post-schedule-list">
+                                <div class="scheduled-post">
+                                    <div class="post-schedule-time">
+                                        <div class="schedule-date">June 10</div>
+                                        <div class="schedule-time">10:15 AM</div>
+                                    </div>
+                                    <div class="post-schedule-content">
+                                        <h4 class="schedule-post-title">Leadership Insights From Recent Conference</h4>
+                                        <div class="schedule-post-excerpt">Key takeaways from the 2025 Leadership Summit that every manager should consider...</div>
+                                        <div class="post-schedule-tags">
+                                            <span class="post-tag">Leadership</span>
+                                            <span class="post-tag">Management</span>
+                                            <span class="post-tag">Draft</span>
+                                        </div>
+                                    </div>
+                                    <div class="post-schedule-actions">
+                                        <button class="btn btn--sm btn--icon">✏️</button>
+                                        <button class="btn btn--sm btn--icon">🗑️</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="scheduled-post">
+                                    <div class="post-schedule-time">
+                                        <div class="schedule-date">June 12</div>
+                                        <div class="schedule-time">2:00 PM</div>
+                                    </div>
+                                    <div class="post-schedule-content">
+                                        <h4 class="schedule-post-title">Digital Transformation: Beyond the Basics</h4>
+                                        <div class="schedule-post-excerpt">Companies are moving past initial digital transformation efforts to focus on deeper business model innovations...</div>
+                                        <div class="post-schedule-tags">
+                                            <span class="post-tag">Digital</span>
+                                            <span class="post-tag">Innovation</span>
+                                            <span class="post-tag">Scheduled</span>
+                                        </div>
+                                    </div>
+                                    <div class="post-schedule-actions">
+                                        <button class="btn btn--sm btn--icon">✏️</button>
+                                        <button class="btn btn--sm btn--icon">🗑️</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="scheduled-post">
+                                    <div class="post-schedule-time">
+                                        <div class="schedule-date">June 20</div>
+                                        <div class="schedule-time">9:00 AM</div>
+                                    </div>
+                                    <div class="post-schedule-content">
+                                        <h4 class="schedule-post-title">Innovation Series: Emerging Tech for 2026</h4>
+                                        <div class="schedule-post-excerpt">A look at the emerging technologies that will shape business strategy in the coming year...</div>
+                                        <div class="post-schedule-tags">
+                                            <span class="post-tag">Technology</span>
+                                            <span class="post-tag">Future</span>
+                                            <span class="post-tag">Scheduled</span>
+                                        </div>
+                                    </div>
+                                    <div class="post-schedule-actions">
+                                        <button class="btn btn--sm btn--icon">✏️</button>
+                                        <button class="btn btn--sm btn--icon">🗑️</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Schedule optimization suggestions -->
+                            <div class="schedule-suggestions">
+                                <h4><span class="icon">💡</span> Posting Recommendations</h4>
+                                <ul class="recommendation-list">
+                                    <li>Consider scheduling a post for June 15th to maintain consistent weekly cadence</li>
+                                    <li>Your posts perform best when published on Tuesday and Thursday mornings</li>
+                                    <li>Technology topics receive 28% more engagement than other content categories</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Analytics Tab -->
+                <section id="analytics" class="dashboard-tab" role="tabpanel" aria-labelledby="analytics-tab">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <div class="dashboard-title-icon">📈</div>
+                            <h2>Performance Analytics</h2>
+                        </div>
+                        <div class="dashboard-actions">
+                            <div class="date-range-picker">
+                                <select class="form-select">
+                                    <option value="7days">Last 7 days</option>
+                                    <option value="30days" selected>Last 30 days</option>
+                                    <option value="3months">Last 3 months</option>
+                                    <option value="6months">Last 6 months</option>
+                                    <option value="12months">Last 12 months</option>
+                                    <option value="custom">Custom range</option>
+                                </select>
+                            </div>
+                            <button class="btn btn--outline btn--sm">
+                                <span class="icon">📄</span> Export Report
+                            </button>
+                            <button class="btn btn--primary btn--sm">
+                                <span class="icon">🔄</span> Refresh Data
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-content">
+                        <!-- Performance Summary -->
+                        <div class="analytics-summary">
+                            <div class="metric-card">
+                                <div class="metric-icon">👁️</div>
+                                <div class="metric-data">
+                                    <h3 class="metric-value">8,742</h3>
+                                    <p class="metric-label">Total Impressions</p>
+                                </div>
+                                <div class="metric-trend trend-up">+12.4%</div>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-icon">👍</div>
+                                <div class="metric-data">
+                                    <h3 class="metric-value">1,263</h3>
+                                    <p class="metric-label">Total Engagements</p>
+                                </div>
+                                <div class="metric-trend trend-up">+8.7%</div>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-icon">💬</div>
+                                <div class="metric-data">
+                                    <h3 class="metric-value">284</h3>
+                                    <p class="metric-label">Comments</p>
+                                </div>
+                                <div class="metric-trend trend-up">+15.2%</div>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-icon">💸</div>
+                                <div class="metric-data">
+                                    <h3 class="metric-value">14.5%</h3>
+                                    <p class="metric-label">Conversion Rate</p>
+                                </div>
+                                <div class="metric-trend trend-up">+2.3%</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Charts Row -->
+                        <div class="analytics-charts-row">
+                            <div class="chart-container engagement-chart">
+                                <div class="chart-header">
+                                    <h3>Engagement Trends</h3>
+                                    <div class="chart-legend">
+                                        <span class="legend-item"><span class="legend-color" style="background-color: #0a66c2;"></span> Likes</span>
+                                        <span class="legend-item"><span class="legend-color" style="background-color: #57a3e8;"></span> Comments</span>
+                                        <span class="legend-item"><span class="legend-color" style="background-color: #a6c8f0;"></span> Shares</span>
+                                    </div>
+                                </div>
+                                <div class="chart-placeholder" style="height: 280px; background-color: #f7f9fc; display: flex; align-items: center; justify-content: center;">
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 36px; opacity: 0.5;">📊</div>
+                                        <p>Engagement Trends Chart</p>
+                                        <p class="sub-text">(Visualization would be rendered by JavaScript)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-container audience-chart">
+                                <div class="chart-header">
+                                    <h3>Audience Demographics</h3>
+                                    <div class="chart-segmented-control">
+                                        <button class="segment active">Industry</button>
+                                        <button class="segment">Role</button>
+                                        <button class="segment">Seniority</button>
+                                    </div>
+                                </div>
+                                <div class="chart-placeholder" style="height: 280px; background-color: #f7f9fc; display: flex; align-items: center; justify-content: center;">
+                                    <div style="text-align: center;">
+                                        <div style="font-size: 36px; opacity: 0.5;">🍩</div>
+                                        <p>Audience Demographics Chart</p>
+                                        <p class="sub-text">(Visualization would be rendered by JavaScript)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Post Performance Analysis -->
+                        <div class="post-performance-section">
+                            <div class="section-header">
+                                <h3>Post Performance Analysis</h3>
+                                <div class="section-actions">
+                                    <button class="btn btn--sm btn--outline"><span class="icon">🔍</span> Filter</button>
+                                    <select class="form-select form-select--sm">
+                                        <option value="engagement">Sort by Engagement</option>
+                                        <option value="date">Sort by Date</option>
+                                        <option value="impressions">Sort by Impressions</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="performance-table-container">
+                                <table class="performance-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Post</th>
+                                            <th>Date</th>
+                                            <th>Topic</th>
+                                            <th>Impressions</th>
+                                            <th>Engagement</th>
+                                            <th>Comments</th>
+                                            <th>CTR</th>
+                                            <th>Performance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="post-info">
+                                                    <div class="post-icon">💡</div>
+                                                    <div class="post-title">AI in Enterprise Software Development</div>
+                                                </div>
+                                            </td>
+                                            <td>June 3, 2025</td>
+                                            <td><span class="topic-tag">Technology</span></td>
+                                            <td>2,451</td>
+                                            <td>362</td>
+                                            <td>48</td>
+                                            <td>4.2%</td>
+                                            <td><div class="performance-bar" style="--performance: 92%;"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="post-info">
+                                                    <div class="post-icon">📈</div>
+                                                    <div class="post-title">Future of Hybrid Work Trends</div>
+                                                </div>
+                                            </td>
+                                            <td>May 28, 2025</td>
+                                            <td><span class="topic-tag">Workplace</span></td>
+                                            <td>1,865</td>
+                                            <td>274</td>
+                                            <td>36</td>
+                                            <td>3.8%</td>
+                                            <td><div class="performance-bar" style="--performance: 86%;"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="post-info">
+                                                    <div class="post-icon">💼</div>
+                                                    <div class="post-title">Leadership Lessons from Tech Innovators</div>
+                                                </div>
+                                            </td>
+                                            <td>May 22, 2025</td>
+                                            <td><span class="topic-tag">Leadership</span></td>
+                                            <td>2,103</td>
+                                            <td>316</td>
+                                            <td>42</td>
+                                            <td>3.9%</td>
+                                            <td><div class="performance-bar" style="--performance: 88%;"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="post-info">
+                                                    <div class="post-icon">🧐</div>
+                                                    <div class="post-title">Mental Health in Remote Workplaces</div>
+                                                </div>
+                                            </td>
+                                            <td>May 15, 2025</td>
+                                            <td><span class="topic-tag">Wellbeing</span></td>
+                                            <td>2,324</td>
+                                            <td>311</td>
+                                            <td>51</td>
+                                            <td>3.7%</td>
+                                            <td><div class="performance-bar" style="--performance: 90%;"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="post-info">
+                                                    <div class="post-icon">🌟</div>
+                                                    <div class="post-title">Celebrating Team Achievements: Q2 Results</div>
+                                                </div>
+                                            </td>
+                                            <td>May 7, 2025</td>
+                                            <td><span class="topic-tag">Achievements</span></td>
+                                            <td>1,768</td>
+                                            <td>255</td>
+                                            <td>28</td>
+                                            <td>3.5%</td>
+                                            <td><div class="performance-bar" style="--performance: 79%;"></div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Insights Section -->
+                        <div class="analytics-insights">
+                            <h3><span class="icon">🔮</span> Performance Insights</h3>
+                            <div class="insights-grid">
+                                <div class="insight-card">
+                                    <div class="insight-header">
+                                        <div class="insight-icon">📈</div>
+                                        <h4>Top Performing Topics</h4>
+                                    </div>
+                                    <ul class="insight-list">
+                                        <li><span class="highlight">Technology</span> posts receive 42% more engagement than other topics</li>
+                                        <li><span class="highlight">Leadership</span> content generates the most comments and discussions</li>
+                                        <li><span class="highlight">Wellbeing</span> topics are gaining traction with 37% increase month-over-month</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="insight-card">
+                                    <div class="insight-header">
+                                        <div class="insight-icon">📋</div>
+                                        <h4>Content Format Analysis</h4>
+                                    </div>
+                                    <ul class="insight-list">
+                                        <li>Posts with <span class="highlight">5+ bullet points</span> receive 27% higher engagement</li>
+                                        <li>Including a <span class="highlight">question</span> at the end increases comments by 54%</li>
+                                        <li><span class="highlight">Story-based</span> posts have 31% higher completion rates</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="insight-card">
+                                    <div class="insight-header">
+                                        <div class="insight-icon">🕐</div>
+                                        <h4>Optimal Posting Times</h4>
+                                    </div>
+                                    <ul class="insight-list">
+                                        <li><span class="highlight">Tuesday and Thursday</span> posts perform 31% better than other weekdays</li>
+                                        <li>The <span class="highlight">9am-11am</span> time slot shows peak audience engagement</li>
+                                        <li>Weekend posts receive <span class="highlight">38% fewer</span> impressions but higher comment rates</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="insight-card">
+                                    <div class="insight-header">
+                                        <div class="insight-icon">🎥</div>
+                                        <h4>Audience Behavior</h4>
+                                    </div>
+                                    <ul class="insight-list">
+                                        <li><span class="highlight">Tech industry</span> professionals engage most with your content</li>
+                                        <li><span class="highlight">Senior managers</span> are your fastest growing audience segment</li>
+                                        <li>Content gets reshared most by people in <span class="highlight">software development</span> roles</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Voice Profile Tab -->
+                <section id="voice-profile" class="dashboard-tab" role="tabpanel" aria-labelledby="voice-profile-tab">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <div class="dashboard-title-icon">🗣️</div>
+                            <h2>Voice & Style Profile</h2>
+                        </div>
+                        <div class="dashboard-actions">
+                            <button class="btn btn--primary btn--sm" id="saveVoiceProfileBtn">
+                                <span class="icon">💾</span> Save Profile
+                            </button>
+                             <button class="btn btn--outline btn--sm" id="resetVoiceProfileBtn">
+                                <span class="icon">🔄</span> Reset to Default
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-content">
+                        <div class="voice-profile-grid">
+                            <!-- Column 1: Core Voice Attributes -->
+                            <div class="voice-profile-column">
+                                <div class="form-section">
+                                    <h3 class="section-title">Core Voice Attributes</h3>
+                                    <div class="form-group">
+                                        <label for="professionalRole">Your Professional Role/Identity</label>
+                                        <input type="text" id="professionalRole" class="form-control" placeholder="e.g., Senior Software Engineer, Marketing Director">
+                                        <small class="form-text">Clearly define your primary professional identity.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="targetAudience">Primary Target Audience</label>
+                                        <input type="text" id="targetAudience" class="form-control" placeholder="e.g., Tech Leaders, Aspiring Entrepreneurs, HR Professionals">
+                                        <small class="form-text">Who are you primarily trying to reach?</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="keyExpertise">Areas of Key Expertise (comma-separated)</label>
+                                        <input type="text" id="keyExpertise" class="form-control" placeholder="e.g., AI Development, Product Management, SaaS Growth">
+                                        <small class="form-text">What topics are you an expert in?</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="communicationGoals">Communication Goals (select up to 3)</label>
+                                        <div class="checkbox-group">
+                                            <label><input type="checkbox" name="commGoals" value="educate"> Educate & Inform</label>
+                                            <label><input type="checkbox" name="commGoals" value="inspire"> Inspire & Motivate</label>
+                                            <label><input type="checkbox" name="commGoals" value="network"> Network & Connect</label>
+                                            <label><input type="checkbox" name="commGoals" value="thought-leadership"> Establish Thought Leadership</label>
+                                            <label><input type="checkbox" name="commGoals" value="promote"> Promote Services/Products</label>
+                                            <label><input type="checkbox" name="commGoals" value="share-insights"> Share Industry Insights</label>
+                                        </div>
+                                        <small class="form-text">What do you want to achieve with your posts?</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Column 2: Tone & Style Preferences -->
+                            <div class="voice-profile-column">
+                                <div class="form-section">
+                                    <h3 class="section-title">Tone & Style Preferences</h3>
+                                    <div class="form-group">
+                                        <label for="toneFormalInformal">Formality Level</label>
+                                        <div class="slider-container">
+                                            <span>Formal</span>
+                                            <input type="range" id="toneFormalInformal" class="form-range" min="0" max="100" value="60">
+                                            <span>Informal</span>
+                                        </div>
+                                        <small class="form-text">Adjust the slider to set your preferred formality.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="toneSeriousHumorous">Seriousness vs. Humor</label>
+                                        <div class="slider-container">
+                                            <span>Serious</span>
+                                            <input type="range" id="toneSeriousHumorous" class="form-range" min="0" max="100" value="30">
+                                            <span>Humorous</span>
+                                        </div>
+                                        <small class="form-text">How much humor do you want to incorporate?</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Preferred Language Style (select multiple)</label>
+                                        <div class="checkbox-group">
+                                            <label><input type="checkbox" name="langStyle" value="direct"> Direct & Concise</label>
+                                            <label><input type="checkbox" name="langStyle" value="storytelling"> Storytelling</label>
+                                            <label><input type="checkbox" name="langStyle" value="technical"> Technical & Data-driven</label>
+                                            <label><input type="checkbox" name="langStyle" value="conversational"> Conversational</label>
+                                            <label><input type="checkbox" name="langStyle" value="academic"> Academic & Formal</label>
+                                            <label><input type="checkbox" name="langStyle" value="inspirational"> Inspirational & Motivational</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emojiUsage">Emoji Usage</label>
+                                        <select id="emojiUsage" class="form-select">
+                                            <option value="none">None</option>
+                                            <option value="sparingly">Sparingly (1-2 per post)</option>
+                                            <option value="moderate" selected>Moderate (2-4 per post)</option>
+                                            <option value="frequent">Frequent (5+ per post)</option>
+                                        </select>
+                                        <small class="form-text">How often do you like to use emojis?</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Customization Section -->
+                        <div class="form-section advanced-customization">
+                            <h3 class="section-title">Advanced Customization</h3>
+                            <div class="form-group">
+                                <label for="customInstructions">Specific Instructions for AI (Optional)</label>
+                                <textarea id="customInstructions" class="form-control" rows="4" placeholder="e.g., Always start with a question. Avoid using jargon like 'synergy'. Include a call to action to visit my website."></textarea>
+                                <small class="form-text">Provide any specific do's or don'ts for the AI post generator.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="keywordsToInclude">Keywords/Phrases to Always Include (comma-separated)</label>
+                                <input type="text" id="keywordsToInclude" class="form-control" placeholder="e.g., sustainable tech, innovation, future of work">
+                                <small class="form-text">List any keywords or phrases you want to consistently feature.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="keywordsToAvoid">Keywords/Phrases to Avoid (comma-separated)</label>
+                                <input type="text" id="keywordsToAvoid" class="form-control" placeholder="e.g., just, basically, very">
+                                <small class="form-text">List any words or phrases you prefer not to use.</small>
+                            </div>
+                        </div>
+                        
+                        <div class="voice-profile-preview-panel">
+                            <h3 class="section-title">Voice Profile Summary & Preview</h3>
+                            <div class="summary-card">
+                                <p><strong>Role:</strong> <span id="previewRole">Senior Software Engineer</span></p>
+                                <p><strong>Audience:</strong> <span id="previewAudience">Tech Leaders</span></p>
+                                <p><strong>Expertise:</strong> <span id="previewExpertise">AI Development, SaaS</span></p>
+                                <p><strong>Goals:</strong> <span id="previewGoals">Educate, Network</span></p>
+                                <p><strong>Tone:</strong> <span id="previewTone">Mostly Formal, Slightly Humorous</span></p>
+                                <p><strong>Style:</strong> <span id="previewStyle">Direct, Conversational, Sparingly uses Emojis</span></p>
+                            </div>
+                            <button class="btn btn--secondary btn--sm" id="generateVoiceSampleBtn">
+                                <span class="icon">🧪</span> Generate Sample Post with this Voice
+                            </button>
+                            <div id="voiceSampleOutput" class="voice-sample-output" style="display: none;">
+                                <p><em>(Sample post generated based on your current voice profile settings will appear here...)</em></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Content Sources Tab -->
+                <section id="content-sources" class="dashboard-tab" role="tabpanel" aria-labelledby="content-sources-tab">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <div class="dashboard-title-icon">📚</div>
+                            <h2>Content Sources</h2>
+                        </div>
+                        <div class="dashboard-actions">
+                            <button class="btn btn--primary btn--sm" id="addSourceBtn">
+                                <span class="icon">➕</span> Add New Source
+                            </button>
+                            <button class="btn btn--outline btn--sm">
+                                <span class="icon">🔄</span> Refresh All
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-content">
+                        <!-- Source Type Navigation -->
+                        <div class="source-type-nav">
+                            <button class="source-type-btn active" data-source-type="all">All Sources <span class="badge">8</span></button>
+                            <button class="source-type-btn" data-source-type="rss">RSS Feeds <span class="badge">5</span></button>
+                            <button class="source-type-btn" data-source-type="news-api">News APIs <span class="badge">2</span></button>
+                            <button class="source-type-btn" data-source-type="custom">Custom <span class="badge">1</span></button>
+                        </div>
+                        
+                        <!-- Search and Filter -->
+                        <div class="source-search-filter">
+                            <div class="search-box">
+                                <input type="text" class="form-control" placeholder="Search sources...">
+                                <button class="search-btn"><span class="icon">🔍</span></button>
+                            </div>
+                            <div class="filter-options">
+                                <select class="form-select">
+                                    <option value="all">All Categories</option>
+                                    <option value="tech">Technology</option>
+                                    <option value="business">Business</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="leadership">Leadership</option>
+                                </select>
+                                <select class="form-select">
+                                    <option value="all">All Statuses</option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                    <option value="error">Error</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Sources Grid -->
+                        <div class="sources-grid">
+                            <!-- RSS Source Example 1 -->
+                            <div class="source-card active">
+                                <div class="source-header">
+                                    <div class="source-icon rss-icon">📰</div>
+                                    <div class="source-status"><span class="status-indicator active"></span> Active</div>
+                                    <div class="source-menu">
+                                        <button class="menu-btn"><span class="icon">⋮</span></button>
+                                    </div>
+                                </div>
+                                <div class="source-body">
+                                    <h3 class="source-name">TechCrunch</h3>
+                                    <p class="source-details">RSS Feed • Technology</p>
+                                    <div class="source-stats">
+                                        <div class="stat">
+                                            <span class="stat-value">42</span>
+                                            <span class="stat-label">Posts</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="stat-value">12</span>
+                                            <span class="stat-label">Last 24h</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="stat-value">2h ago</span>
+                                            <span class="stat-label">Updated</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="source-actions">
+                                    <button class="btn btn--sm btn--outline"><span class="icon">🔄</span> Refresh</button>
+                                    <button class="btn btn--sm btn--outline"><span class="icon">⚙️</span> Settings</button>
+                                </div>
+                            </div>
+                            
+                            <!-- RSS Source Example 2 -->
+                            <div class="source-card active">
+                                <div class="source-header">
+                                    <div class="source-icon rss-icon">📰</div>
+                                    <div class="source-status"><span class="status-indicator active"></span> Active</div>
+                                    <div class="source-menu">
+                                        <button class="menu-btn"><span class="icon">⋮</span></button>
+                                    </div>
+                                </div>
+                                <div class="source-body">
+                                    <h3 class="source-name">Harvard Business Review</h3>
+                                    <p class="source-details">RSS Feed • Leadership</p>
+                                    <div class="source-stats">
+                                        <div class="stat">
+                                            <span class="stat-value">28</span>
+                                            <span class="stat-label">Posts</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="stat-value">3</span>
+                                            <span class="stat-label">Last 24h</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="stat-value">6h ago</span>
+                                            <span class="stat-label">Updated</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="source-actions">
+                                    <button class="btn btn--sm btn--outline"><span class="icon">🔄</span> Refresh</button>
+                                    <button class="btn btn--sm btn--outline"><span class="icon">⚙️</span> Settings</button>
+                                </div>
+                            </div>
+                            
+                            <!-- News API Example -->
+                            <div class="source-card active">
+                                <div class="source-header">
+                                    <div class="source-icon api-icon">🔌</div>
+                                    <div class="source-status"><span class="status-indicator active"></span> Active</div>
+                                    <div class="source-menu">
+                                        <button class="menu-btn"><span class="icon">⋮</span></button>
+                                    </div>
+                                </div>
+                                <div class="source-body">
+                                    <h3 class="source-name">NewsAPI - Tech</h3>
+                                    <p class="source-details">API Integration • Technology</p>
+                                    <div class="source-stats">
+                                        <div class="stat">
+                                            <span class="stat-value">87</span>
+                                            <span class="stat-label">Posts</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="stat-value">24</span>
+                                            <span class="stat-label">Last 24h</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="stat-value">1h ago</span>
+                                            <span class="stat-label">Updated</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="source-actions">
+                                    <button class="btn btn--sm btn--outline"><span class="icon">🔄</span> Refresh</button>
+                                    <button class="btn btn--sm btn--outline"><span class="icon">⚙️</span> Settings</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Error State Example -->
+                            <div class="source-card error">
+                                <div class="source-header">
+                                    <div class="source-icon rss-icon">📰</div>
+                                    <div class="source-status"><span class="status-indicator error"></span> Error</div>
+                                    <div class="source-menu">
+                                        <button class="menu-btn"><span class="icon">⋮</span></button>
+                                    </div>
+                                </div>
+                                <div class="source-body">
+                                    <h3 class="source-name">Fast Company</h3>
+                                    <p class="source-details">RSS Feed • Business</p>
+                                    <div class="source-error-message">
+                                        <span class="icon">⚠️</span> Connection timed out. Unable to fetch content.
+                                    </div>
+                                </div>
+                                <div class="source-actions">
+                                    <button class="btn btn--sm btn--outline"><span class="icon">🔄</span> Retry</button>
+                                    <button class="btn btn--sm btn--outline"><span class="icon">⚙️</span> Settings</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Inactive Example -->
+                            <div class="source-card inactive">
+                                <div class="source-header">
+                                    <div class="source-icon custom-icon">📁</div>
+                                    <div class="source-status"><span class="status-indicator inactive"></span> Inactive</div>
+                                    <div class="source-menu">
+                                        <button class="menu-btn"><span class="icon">⋮</span></button>
+                                    </div>
+                                </div>
+                                <div class="source-body">
+                                    <h3 class="source-name">Company Blog</h3>
+                                    <p class="source-details">Custom • Marketing</p>
+                                    <p class="source-inactive-message">Source has been disabled. Click activate to resume content fetching.</p>
+                                </div>
+                                <div class="source-actions">
+                                    <button class="btn btn--sm btn--primary"><span class="icon">▶️</span> Activate</button>
+                                    <button class="btn btn--sm btn--outline"><span class="icon">⚙️</span> Settings</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Add New Source Card -->
+                            <div class="source-card add-new-card">
+                                <div class="add-new-content">
+                                    <div class="add-icon">➕</div>
+                                    <h3>Add New Source</h3>
+                                    <p>Connect a new RSS feed, API, or custom content source</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Add Source Modal (would be hidden by default) -->
+                        <div class="modal" id="addSourceModal" style="display: none;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2>Add New Content Source</h2>
+                                    <button class="modal-close">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="source-type-selector">
+                                        <div class="source-type-option active" data-type="rss">
+                                            <div class="type-icon">📰</div>
+                                            <h3>RSS Feed</h3>
+                                            <p>Connect any RSS feed URL</p>
+                                        </div>
+                                        <div class="source-type-option" data-type="api">
+                                            <div class="type-icon">🔌</div>
+                                            <h3>News API</h3>
+                                            <p>Integration with popular news APIs</p>
+                                        </div>
+                                        <div class="source-type-option" data-type="custom">
+                                            <div class="type-icon">📁</div>
+                                            <h3>Custom Source</h3>
+                                            <p>Upload or link your own content</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="source-form rss-form" id="rssSourceForm">
+                                        <div class="form-group">
+                                            <label>RSS Feed URL</label>
+                                            <input type="url" class="form-control" placeholder="https://example.com/feed.xml">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Source Name</label>
+                                            <input type="text" class="form-control" placeholder="e.g. TechCrunch Blog">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Category</label>
+                                            <select class="form-select">
+                                                <option value="">Select a category</option>
+                                                <option value="tech">Technology</option>
+                                                <option value="business">Business</option>
+                                                <option value="marketing">Marketing</option>
+                                                <option value="leadership">Leadership</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Refresh Frequency</label>
+                                            <select class="form-select">
+                                                <option value="30">Every 30 minutes</option>
+                                                <option value="60" selected>Every hour</option>
+                                                <option value="180">Every 3 hours</option>
+                                                <option value="360">Every 6 hours</option>
+                                                <option value="720">Every 12 hours</option>
+                                                <option value="1440">Once a day</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" checked> Automatic content curation
+                                            </label>
+                                            <small class="form-text">AI will automatically filter content by relevance to your interests</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn--outline" id="cancelAddSourceBtn">Cancel</button>
+                                    <button class="btn btn--primary" id="saveSourceBtn">Add Source</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- API Keys Tab -->
+                <section id="api-keys" class="dashboard-tab" role="tabpanel" aria-labelledby="api-keys-tab">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <div class="dashboard-title-icon">🔑</div>
+                            <h2>API Integrations</h2>
+                        </div>
+                        <div class="dashboard-actions">
+                            <button class="btn btn--primary btn--sm" id="addNewKeyBtn">
+                                <span class="icon">➕</span> Add New Key
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-content">
+                        <div class="api-keys-intro">
+                            <p>Manage your API integrations and credentials. These keys enable connection with AI providers, content sources, and LinkedIn API.</p>
+                            <div class="api-security-notice">
+                                <div class="notice-icon">🔒</div>
+                                <div class="notice-content">
+                                    <h4>Secure Storage</h4>
+                                    <p>All API keys are encrypted in our database and never exposed in client-side code.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- LLM Provider Integration -->
+                        <div class="api-section">
+                            <h3 class="section-title">🤖 LLM Provider Integration</h3>
+                            
+                            <div class="api-card active">
+                                <div class="api-primary-info">
+                                    <div class="api-logo" style="background-image: url('/static/images/logo-openai.png');"></div>
+                                    <div class="api-details">
+                                        <h4>OpenAI</h4>
+                                        <div class="api-status"><span class="status-dot active"></span> Active</div>
+                                    </div>
+                                </div>
+                                <div class="api-info">
+                                    <div class="api-meta">
+                                        <span><strong>Model:</strong> gpt-4</span>
+                                        <span><strong>Added:</strong> May 12, 2025</span>
+                                        <span><strong>Last Used:</strong> Today</span>
+                                    </div>
+                                    <div class="api-key-display">
+                                        <span class="key-label">API Key:</span>
+                                        <div class="key-value">
+                                            <input type="password" value="••••••••••••••••••••••••" readonly>
+                                            <button class="key-action" title="Show/Hide"><span class="icon">👁️</span></button>
+                                            <button class="key-action" title="Copy"><span class="icon">📋</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="api-actions">
+                                    <button class="btn btn--sm btn--outline"><span class="icon">✏️</span> Edit</button>
+                                    <button class="btn btn--sm btn--outline"><span class="icon">💸</span> Usage</button>
+                                    <button class="btn btn--sm btn--danger"><span class="icon">🚮</span> Remove</button>
+                                </div>
+                            </div>
+                            
+                            <div class="api-card">
+                                <div class="api-primary-info">
+                                    <div class="api-logo" style="background-image: url('/static/images/logo-anthropic.png');"></div>
+                                    <div class="api-details">
+                                        <h4>Anthropic</h4>
+                                        <div class="api-status"><span class="status-dot inactive"></span> Not Configured</div>
+                                    </div>
+                                </div>
+                                <div class="api-setup-prompt">
+                                    <p>Add Claude API integration to utilize Anthropic's LLM capabilities.</p>
+                                    <button class="btn btn--sm btn--primary"><span class="icon">➕</span> Configure Anthropic API</button>
+                                </div>
+                            </div>
+                            
+                            <div class="api-card">
+                                <div class="api-primary-info">
+                                    <div class="api-logo" style="background-image: url('/static/images/logo-google.png');"></div>
+                                    <div class="api-details">
+                                        <h4>Google AI</h4>
+                                        <div class="api-status"><span class="status-dot inactive"></span> Not Configured</div>
+                                    </div>
+                                </div>
+                                <div class="api-setup-prompt">
+                                    <p>Add Google Gemini API integration for advanced AI capabilities.</p>
+                                    <button class="btn btn--sm btn--primary"><span class="icon">➕</span> Configure Google AI</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Content API Integrations -->
+                        <div class="api-section">
+                            <h3 class="section-title">📰 Content API Integrations</h3>
+                            
+                            <div class="api-card active">
+                                <div class="api-primary-info">
+                                    <div class="api-logo" style="background-image: url('/static/images/logo-newsapi.png');"></div>
+                                    <div class="api-details">
+                                        <h4>NewsAPI</h4>
+                                        <div class="api-status"><span class="status-dot active"></span> Active</div>
+                                    </div>
+                                </div>
+                                <div class="api-info">
+                                    <div class="api-meta">
+                                        <span><strong>Plan:</strong> Business</span>
+                                        <span><strong>Added:</strong> April 5, 2025</span>
+                                        <span><strong>Usage:</strong> 1,478/5,000 requests this month</span>
+                                    </div>
+                                    <div class="api-key-display">
+                                        <span class="key-label">API Key:</span>
+                                        <div class="key-value">
+                                            <input type="password" value="••••••••••••••••••••••••••••" readonly>
+                                            <button class="key-action" title="Show/Hide"><span class="icon">👁️</span></button>
+                                            <button class="key-action" title="Copy"><span class="icon">📋</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="api-actions">
+                                    <button class="btn btn--sm btn--outline"><span class="icon">✏️</span> Edit</button>
+                                    <button class="btn btn--sm btn--outline"><span class="icon">📂</span> Feeds</button>
+                                    <button class="btn btn--sm btn--danger"><span class="icon">🚮</span> Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- LinkedIn API Integration -->
+                        <div class="api-section">
+                            <h3 class="section-title">💼 LinkedIn API Integration</h3>
+                            
+                            <div class="api-card active">
+                                <div class="api-primary-info">
+                                    <div class="api-logo" style="background-image: url('/static/images/logo-linkedin.png');"></div>
+                                    <div class="api-details">
+                                        <h4>LinkedIn Developer API</h4>
+                                        <div class="api-status"><span class="status-dot active"></span> Connected</div>
+                                    </div>
+                                </div>
+                                <div class="api-info">
+                                    <div class="api-meta">
+                                        <span><strong>Connected Account:</strong> johndoe@example.com</span>
+                                        <span><strong>Permissions:</strong> Profile, Posts, Analytics</span>
+                                        <span><strong>Last Synced:</strong> Today at 2:45 PM</span>
+                                    </div>
+                                    <div class="connection-details">
+                                        <span><strong>App ID:</strong> linkedin_app_12345</span>
+                                        <span><strong>OAuth Status:</strong> Valid</span>
+                                        <span><strong>Token Expires:</strong> July 8, 2025</span>
+                                    </div>
+                                </div>
+                                <div class="api-actions">
+                                    <button class="btn btn--sm btn--outline"><span class="icon">🔄</span> Refresh Token</button>
+                                    <button class="btn btn--sm btn--outline"><span class="icon">📄</span> View Permissions</button>
+                                    <button class="btn btn--sm btn--danger"><span class="icon">🔒</span> Disconnect</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Add New Integration Modal (hidden by default) -->
+                        <div class="modal" id="addApiKeyModal" style="display: none;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2>Add New API Key</h2>
+                                    <button class="modal-close">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="api-provider-selector">
+                                        <h3>Select API Provider</h3>
+                                        <div class="provider-options">
+                                            <div class="provider-option">
+                                                <div class="provider-logo" style="background-image: url('/static/images/logo-openai.png');"></div>
+                                                <span>OpenAI</span>
+                                            </div>
+                                            <div class="provider-option">
+                                                <div class="provider-logo" style="background-image: url('/static/images/logo-anthropic.png');"></div>
+                                                <span>Anthropic</span>
+                                            </div>
+                                            <div class="provider-option">
+                                                <div class="provider-logo" style="background-image: url('/static/images/logo-google.png');"></div>
+                                                <span>Google AI</span>
+                                            </div>
+                                            <div class="provider-option">
+                                                <div class="provider-logo" style="background-image: url('/static/images/logo-newsapi.png');"></div>
+                                                <span>NewsAPI</span>
+                                            </div>
+                                            <div class="provider-option">
+                                                <div class="provider-logo" style="background-image: url('/static/images/logo-custom.png');"></div>
+                                                <span>Custom</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <form id="apiKeyForm">
+                                        <div class="form-group">
+                                            <label for="apiKeyName">Key Name/Description</label>
+                                            <input type="text" id="apiKeyName" class="form-control" placeholder="e.g., OpenAI Production Key">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="apiKeyValue">API Key</label>
+                                            <input type="password" id="apiKeyValue" class="form-control" placeholder="Paste your API key here">
+                                            <small class="form-text">Your key will be encrypted before storage</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="apiModel">Default Model (OpenAI)</label>
+                                            <select id="apiModel" class="form-select">
+                                                <option value="gpt-4">GPT-4</option>
+                                                <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                                                <option value="gpt-4-turbo">GPT-4 Turbo</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" checked> Set as default provider
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" checked> Test connection before saving
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn--outline" id="cancelApiKeyBtn">Cancel</button>
+                                    <button class="btn btn--primary" id="saveApiKeyBtn">Save API Key</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Preferences Tab -->
+                <section id="preferences" class="dashboard-tab" role="tabpanel" aria-labelledby="preferences-tab">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <div class="dashboard-title-icon">⚙️</div>
+                            <h2>Preferences</h2>
+                        </div>
+                        <div class="dashboard-actions">
+                            <button class="btn btn--primary btn--sm" id="savePreferencesBtn">
+                                <span class="icon">💾</span> Save Changes
+                            </button>
+                            <button class="btn btn--outline btn--sm" id="resetPreferencesBtn">
+                                <span class="icon">🔄</span> Reset to Default
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-content">
+                        <div class="preferences-intro">
+                            <p>Customize your experience with the LinkedIn Post Generator. Set your preferences for post generation, notifications, and general app behavior.</p>
+                        </div>
+
+                        <div class="preferences-grid">
+                            <!-- Account Settings -->
+                            <div class="preferences-card">
+                                <div class="preferences-card-header">
+                                    <div class="header-icon">👤</div>
+                                    <h3>Account Settings</h3>
+                                </div>
+                                <div class="preferences-card-body">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" value="John Doe">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email Address</label>
+                                        <input type="email" class="form-control" value="johndoe@example.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profilePicture">Profile Picture</label>
+                                        <div class="profile-pic-uploader">
+                                            <div class="current-picture" style="background-image: url('/static/images/profile-placeholder.jpg');"></div>
+                                            <div class="upload-actions">
+                                                <button class="btn btn--outline btn--sm">Change Picture</button>
+                                                <button class="btn btn--outline btn--sm">Remove</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn--outline btn--sm">
+                                            <span class="icon">🔑</span> Change Password
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Interface Preferences -->
+                            <div class="preferences-card">
+                                <div class="preferences-card-header">
+                                    <div class="header-icon">🖽</div>
+                                    <h3>Interface Preferences</h3>
+                                </div>
+                                <div class="preferences-card-body">
+                                    <div class="form-group">
+                                        <label>Theme</label>
+                                        <div class="theme-selector">
+                                            <div class="theme-option light active">
+                                                <div class="theme-preview"></div>
+                                                <span>Light</span>
+                                            </div>
+                                            <div class="theme-option dark">
+                                                <div class="theme-preview"></div>
+                                                <span>Dark</span>
+                                            </div>
+                                            <div class="theme-option system">
+                                                <div class="theme-preview"></div>
+                                                <span>System</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Default Tab</label>
+                                        <select class="form-select">
+                                            <option value="overview">Overview</option>
+                                            <option value="content-hub" selected>Content Hub</option>
+                                            <option value="post-studio">Post Studio</option>
+                                            <option value="schedule">Schedule</option>
+                                            <option value="analytics">Analytics</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Compact Mode</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="compactMode">
+                                            <label for="compactMode"></label>
+                                        </div>
+                                        <small class="form-text">Reduce spacing for more content per screen</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Animations</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="animationsEnabled" checked>
+                                            <label for="animationsEnabled"></label>
+                                        </div>
+                                        <small class="form-text">Enable UI animations and transitions</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notification Settings -->
+                            <div class="preferences-card">
+                                <div class="preferences-card-header">
+                                    <div class="header-icon">🔔</div>
+                                    <h3>Notification Settings</h3>
+                                </div>
+                                <div class="preferences-card-body">
+                                    <div class="form-group">
+                                        <label>Email Notifications</label>
+                                        <div class="checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" checked> Post Scheduled
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" checked> Post Published
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox"> Content Recommendations
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" checked> Post Analytics Report
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Push Notifications</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="pushEnabled" checked>
+                                            <label for="pushEnabled"></label>
+                                        </div>
+                                        <small class="form-text">Receive browser notifications for important events</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Notification Frequency</label>
+                                        <select class="form-select">
+                                            <option value="immediately">Immediately</option>
+                                            <option value="hourly" selected>Hourly Digest</option>
+                                            <option value="daily">Daily Digest</option>
+                                            <option value="weekly">Weekly Digest</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Post Generation Settings -->
+                            <div class="preferences-card">
+                                <div class="preferences-card-header">
+                                    <div class="header-icon">💡</div>
+                                    <h3>Post Generation Settings</h3>
+                                </div>
+                                <div class="preferences-card-body">
+                                    <div class="form-group">
+                                        <label>Default LLM Provider</label>
+                                        <select class="form-select">
+                                            <option value="openai" selected>OpenAI</option>
+                                            <option value="anthropic" disabled>Anthropic (Not Configured)</option>
+                                            <option value="google" disabled>Google AI (Not Configured)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Default Post Language</label>
+                                        <select class="form-select">
+                                            <option value="en-US" selected>English (US)</option>
+                                            <option value="en-GB">English (UK)</option>
+                                            <option value="es">Spanish</option>
+                                            <option value="fr">French</option>
+                                            <option value="de">German</option>
+                                            <option value="pt">Portuguese</option>
+                                            <option value="ja">Japanese</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Post Length Default</label>
+                                        <select class="form-select">
+                                            <option value="short">Short (~100 words)</option>
+                                            <option value="medium" selected>Medium (~200 words)</option>
+                                            <option value="long">Long (~300 words)</option>
+                                            <option value="linkedin-max">LinkedIn Maximum</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Auto-include Hashtags</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="autoHashtags" checked>
+                                            <label for="autoHashtags"></label>
+                                        </div>
+                                        <small class="form-text">Automatically suggest and append relevant hashtags</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Advanced Settings -->
+                            <div class="preferences-card">
+                                <div class="preferences-card-header">
+                                    <div class="header-icon">⚙️</div>
+                                    <h3>Advanced Settings</h3>
+                                </div>
+                                <div class="preferences-card-body">
+                                    <div class="form-group">
+                                        <label>Content Caching</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="contentCaching" checked>
+                                            <label for="contentCaching"></label>
+                                        </div>
+                                        <small class="form-text">Cache content locally to improve performance</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Data Collection</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="dataCollection" checked>
+                                            <label for="dataCollection"></label>
+                                        </div>
+                                        <small class="form-text">Allow anonymous usage data collection to improve services</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Developer Mode</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="developerMode">
+                                            <label for="developerMode"></label>
+                                        </div>
+                                        <small class="form-text">Enable developer tools and debugging features</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn--outline btn--sm">
+                                            <span class="icon">📋</span> Export All Data
+                                        </button>
+                                    </div>
+                                    <div class="form-group danger-zone">
+                                        <h4>Danger Zone</h4>
+                                        <button class="btn btn--danger btn--sm">
+                                            <span class="icon">🚫</span> Clear All Data
+                                        </button>
+                                        <button class="btn btn--danger btn--sm">
+                                            <span class="icon">🚮</span> Delete Account
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </main>
         </div>
         
@@ -429,15 +2225,133 @@
         </div>
     </div>
     
+    <!-- Onboarding Modal -->
+    <div id="onboardingModal" class="onboarding-modal">
+        <div class="onboarding-container">
+            <button id="closeOnboarding" class="onboarding-close">&times;</button>
+            
+            <div class="onboarding-header">
+                <h2 class="onboarding-title">Welcome to LinkedIn Post Generator</h2>
+                <p class="onboarding-subtitle">Let's set up your experience in a few quick steps</p>
+            </div>
+            
+            <div class="onboarding-content">
+                <!-- Step 1: Welcome -->
+                <div class="onboarding-step active">
+                    <h3>Enhanced LinkedIn Content Generator</h3>
+                    <p>This tool helps you create engaging LinkedIn posts that drive engagement and grow your professional network.</p>
+                    <div class="onboarding-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">✍️</div>
+                            <h4 class="feature-title">AI-Powered Content</h4>
+                            <p class="feature-description">Generate professional posts tailored to your industry and voice</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📊</div>
+                            <h4 class="feature-title">Performance Analytics</h4>
+                            <p class="feature-description">Track engagement and optimize your posting strategy</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🔄</div>
+                            <h4 class="feature-title">Workflow Integration</h4>
+                            <p class="feature-description">Seamlessly fits into your content creation process</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Persona Selection -->
+                <div class="onboarding-step">
+                    <h3>Select Your LinkedIn Persona</h3>
+                    <p>Choose the persona that best represents your professional goals:</p>
+                    <div class="persona-options">
+                        <div class="persona-option" data-persona="thought-leader">
+                            <h4>Thought Leader</h4>
+                            <p>Share industry insights and shape conversations</p>
+                        </div>
+                        <div class="persona-option" data-persona="industry-expert">
+                            <h4>Industry Expert</h4>
+                            <p>Demonstrate deep knowledge and authority</p>
+                        </div>
+                        <div class="persona-option" data-persona="networker">
+                            <h4>Networker</h4>
+                            <p>Connect with others and grow your professional circle</p>
+                        </div>
+                        <div class="persona-option" data-persona="career-builder">
+                            <h4>Career Builder</h4>
+                            <p>Position yourself for career advancement</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Content Sources -->
+                <div class="onboarding-step">
+                    <h3>Select Content Sources</h3>
+                    <p>Choose where you'd like to source content inspiration from:</p>
+                    <div class="source-selection">
+                        <label class="source-checkbox">
+                            <input type="checkbox" value="industry-news" checked>
+                            <span>Industry News</span>
+                        </label>
+                        <label class="source-checkbox">
+                            <input type="checkbox" value="trending-topics">
+                            <span>Trending Topics</span>
+                        </label>
+                        <label class="source-checkbox">
+                            <input type="checkbox" value="company-updates">
+                            <span>Company Updates</span>
+                        </label>
+                        <label class="source-checkbox">
+                            <input type="checkbox" value="personal-achievements">
+                            <span>Personal Achievements</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Step 4: Feature Overview -->
+                <div class="onboarding-step">
+                    <h3>You're All Set!</h3>
+                    <p>Your LinkedIn Post Generator is now personalized to your preferences.</p>
+                    <div class="completion-message">
+                        <div class="completion-icon">🎉</div>
+                        <h4>Ready to create engaging content</h4>
+                        <p>Use the dashboard to generate posts, schedule content, and track performance.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="onboarding-footer">
+                <div class="onboarding-footer-left">
+                    <button id="backBtn" class="btn btn-secondary">Back</button>
+                    <button id="skipOnboarding" class="btn btn-link">Skip</button>
+                </div>
+                <div class="onboarding-progress">
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot"></div>
+                </div>
+                <div class="onboarding-footer-right">
+                    <button id="nextStepBtn" class="btn btn-primary">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Core application scripts first -->
     <script src="{{ url_for('static', filename='js/api-connector.js') }}"></script>
     <script src="{{ url_for('static', filename='js/content-generation.js') }}"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    
+    <!-- Enhanced UI components -->
     <script src="{{ url_for('static', filename='js/enhanced-ui.js') }}"></script>
     <script src="{{ url_for('static', filename='js/onboarding.js') }}"></script>
     <script src="{{ url_for('static', filename='js/notification-system.js') }}"></script>
     <script src="{{ url_for('static', filename='js/progressive-disclosure.js') }}"></script>
     <script src="{{ url_for('static', filename='js/accessibility.js') }}"></script>
+    
+    <!-- Integration scripts (order matters) -->
+    <script src="{{ url_for('static', filename='js/integration_order.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     <script src="{{ url_for('static', filename='js/integration.js') }}"></script>
 </body>
 </html>
