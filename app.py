@@ -131,14 +131,6 @@ def handle_exception(e):
         "status": "error"
     }), 500
 
-@app.route('/')
-def index():
-    """Serve the main HTML file from the project root"""
-    try:
-        return send_from_directory(os.path.dirname(os.path.abspath(__file__)), 'index.html')
-    except Exception as e:
-        logger.error(f"Error serving index.html: {e}")
-        return jsonify({"error": "Could not serve the application"}), 500
 
 # API Routes - Version 1
 def api_response(data=None, message=None, status="success", code=200):
