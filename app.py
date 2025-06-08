@@ -305,6 +305,11 @@ def admin_panel():
     """Admin panel for managing application settings"""
     return render_template('admin.html')
 
+@app.route('/generator', methods=['GET'])
+def generator_page():
+    """Serves the main Direct News Generator page."""
+    return render_template('direct-news.html')
+
 @app.route('/api/status', methods=['GET'])
 def get_status():
     """Get current application status"""
