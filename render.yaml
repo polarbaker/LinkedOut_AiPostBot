@@ -1,0 +1,23 @@
+services:
+  # A Flask API service
+  - type: web
+    name: enhanced-linkedin-generator
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: MOCK_MODE
+        value: true
+        # In a production environment, you would want to set this to false
+        # and provide real API keys using Render's environment variable UI
+      - key: PORT
+        value: 10000
+        # Render assigns this internally, but you still need the variable
+      - key: LLM_PROVIDER
+        value: mock
+        # Change to 'gemini' or 'openai' in production and add API keys
+    healthCheckPath: /health
+    # Uncomment if you want automatic deploys from GitHub
+    # autoDeploy: false

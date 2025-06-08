@@ -1,0 +1,321 @@
+/**
+ * Accessibility CSS
+ * Enhanced styles for accessibility features
+ */
+
+/* Skip to content link */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  padding: 8px 16px;
+  background-color: var(--color-primary, #0077b5);
+  color: white;
+  z-index: 9999;
+  transition: top 0.3s ease;
+}
+
+.skip-to-content:focus {
+  top: 0;
+  outline: none;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus management */
+.focus-visible-element:focus {
+  outline: 3px solid var(--color-accent, #0077b5);
+  outline-offset: 2px;
+}
+
+/* High contrast mode */
+body.high-contrast-mode {
+  --color-primary: #0057a5;
+  --color-secondary: #333333;
+  --color-accent: #0057a5;
+  --color-text: #000000;
+  --color-bg: #ffffff;
+  --color-light-bg: #f0f0f0;
+  --color-border: #333333;
+  --color-error: #d30000;
+  --color-success: #006600;
+  --color-warning: #b35900;
+  --color-info: #0057a5;
+}
+
+body.high-contrast-mode .card,
+body.high-contrast-mode .sidebar,
+body.high-contrast-mode .dashboard-header,
+body.high-contrast-mode .tab-content,
+body.high-contrast-mode .modal-content {
+  border: 1px solid #333 !important;
+}
+
+body.high-contrast-mode .btn-primary {
+  background-color: #0057a5;
+  color: white;
+}
+
+body.high-contrast-mode .btn-secondary {
+  background-color: #333;
+  color: white;
+}
+
+body.high-contrast-mode .btn-outline {
+  border: 2px solid #333;
+}
+
+body.high-contrast-mode .toast {
+  border: 2px solid #333;
+}
+
+/* Font size adjustments */
+body.font-size-large {
+  font-size: 18px;
+}
+
+body.font-size-large h1 {
+  font-size: 2.5rem;
+}
+
+body.font-size-large h2 {
+  font-size: 2rem;
+}
+
+body.font-size-large h3 {
+  font-size: 1.75rem;
+}
+
+body.font-size-large .btn,
+body.font-size-large input,
+body.font-size-large select {
+  font-size: 1.1rem;
+}
+
+body.font-size-largest {
+  font-size: 20px;
+}
+
+body.font-size-largest h1 {
+  font-size: 2.8rem;
+}
+
+body.font-size-largest h2 {
+  font-size: 2.3rem;
+}
+
+body.font-size-largest h3 {
+  font-size: 2rem;
+}
+
+body.font-size-largest .btn,
+body.font-size-largest input,
+body.font-size-largest select {
+  font-size: 1.2rem;
+}
+
+/* Accessibility menu styling */
+.accessibility-menu {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  max-width: 90vw;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+  z-index: 9999;
+  padding: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.accessibility-menu.shown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.accessibility-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border, #ddd);
+}
+
+.accessibility-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--color-primary, #0077b5);
+}
+
+.accessibility-header .close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-secondary, #555);
+}
+
+.accessibility-controls {
+  padding: 20px;
+}
+
+.accessibility-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.control-label {
+  font-weight: 500;
+}
+
+/* Toggle switch for accessibility options */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .switch-slider {
+  background-color: var(--color-primary, #0077b5);
+}
+
+input:checked + .switch-slider:before {
+  transform: translateX(22px);
+}
+
+input:focus + .switch-slider {
+  box-shadow: 0 0 1px var(--color-primary, #0077b5);
+}
+
+/* Button group for font size controls */
+.button-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.button-group button {
+  min-width: 40px;
+  text-align: center;
+}
+
+/* Keyboard shortcut styling */
+.shortcuts-list {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.shortcuts-list li {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* Accessibility backdrop */
+.accessibility-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 9998;
+}
+
+/* Focus outline for interactive elements */
+.interactive:focus,
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid var(--color-primary, #0077b5);
+  outline-offset: 2px;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .disclosed {
+    animation: none !important;
+  }
+}
+
+/* ARIA live region styling */
+[aria-live="polite"], 
+[aria-live="assertive"] {
+  position: fixed;
+  top: -10000px;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

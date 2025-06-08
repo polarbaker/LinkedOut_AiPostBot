@@ -1,0 +1,86 @@
+{
+  "application_name": "Enhanced LinkedIn Post Generator with Voice Analysis & Custom Scraping",
+  "core_modules": [
+    {
+      "name": "Voice Analysis Engine",
+      "components": [
+        "Previous Post Analyzer",
+        "Writing Style Extractor",
+        "Tone Profiler",
+        "Vocabulary Mapper",
+        "Sentence Structure Analyzer"
+      ],
+      "technologies": [
+        "OpenAI GPT-4o",
+        "Natural Language Processing",
+        "Style Classification AI"
+      ]
+    },
+    {
+      "name": "Custom Web Scraper",
+      "components": [
+        "Website Monitor",
+        "RSS Feed Aggregator",
+        "Content Extractor",
+        "Article Summarizer",
+        "Real-time Updater"
+      ],
+      "technologies": [
+        "Beautiful Soup",
+        "Selenium",
+        "RSS Parser",
+        "Requests",
+        "Scrapy"
+      ]
+    },
+    {
+      "name": "Content Generation Engine",
+      "components": [
+        "Personalized Summarizer",
+        "Voice-Matched Writer",
+        "LinkedIn Optimizer",
+        "Engagement Predictor",
+        "Post Formatter"
+      ],
+      "technologies": [
+        "GPT-4o API",
+        "Custom Prompting",
+        "Style Transfer AI"
+      ]
+    },
+    {
+      "name": "Automation Workflow",
+      "components": [
+        "Scheduling Engine",
+        "Approval Queue",
+        "Modification Interface",
+        "Analytics Tracker",
+        "Notification System"
+      ],
+      "technologies": [
+        "Workflow Automation",
+        "User Interface",
+        "Analytics APIs"
+      ]
+    }
+  ],
+  "data_flow": [
+    "User provides previous LinkedIn posts \u2192 Voice Analysis Engine",
+    "User selects websites to monitor \u2192 Custom Web Scraper",
+    "Web Scraper extracts latest articles \u2192 Content Generation Engine",
+    "Voice Analysis provides style profile \u2192 Content Generation Engine",
+    "Generated posts sent to \u2192 Approval Queue",
+    "User approves/modifies \u2192 Scheduling Engine or Analytics Tracker"
+  ],
+  "key_features": [
+    "Voice tone analysis from previous posts",
+    "Custom website monitoring",
+    "RSS feed integration",
+    "Real-time article summarization",
+    "Personalized content generation",
+    "One-click approval workflow",
+    "Modification suggestions",
+    "Performance analytics",
+    "Ethical AI compliance"
+  ]
+}

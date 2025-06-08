@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct News Generator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 30px 0;
+            background: #f7f9fc;
+        }
+        .container {
+            max-width: 1000px;
+        }
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 24px;
+            border: none;
+        }
+        .card-header {
+            background: #2867B2; /* LinkedIn color */
+            color: white;
+            border-radius: 12px 12px 0 0 !important;
+            padding: 15px 20px;
+            font-weight: 600;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .btn-primary {
+            background: #2867B2;
+            border-color: #2867B2;
+            padding: 10px 20px;
+        }
+        .btn-primary:hover {
+            background: #1e5091;
+            border-color: #1e5091;
+        }
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        textarea {
+            min-height: 150px;
+        }
+        .style-profile {
+            background-color: #f8faff;
+            border-left: 4px solid #2867B2;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+        }
+        .generated-post {
+            background-color: #fff;
+            border: 1px solid #e0e5ee;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            white-space: pre-line;
+        }
+        .hashtags span {
+            display: inline-block;
+            background-color: #eef2fc;
+            color: #2867B2;
+            padding: 3px 10px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        .stats {
+            color: #6c757d;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .loading {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .spinner-border {
+            color: #2867B2;
+        }
+        .error-message {
+            color: #dc3545;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            background-color: #fff5f5;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Direct LinkedIn News Summary Generator</h1>
+        <p class="text-center mb-4">Directly analyze your writing style from previous posts and generate news summaries</p>
+        
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        Previous LinkedIn Posts
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="previousPosts" class="form-label">Paste several of your previous LinkedIn posts here to analyze your style:</label>
+                            <textarea class="form-control" id="previousPosts" rows="6" placeholder="Paste 3-5 of your previous LinkedIn posts here, separated by line breaks..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        News Content
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="newsTitle" class="form-label">News Article Title:</label>
+                            <input type="text" class="form-control" id="newsTitle" placeholder="Title of the news article...">
+                        </div>
+                        <div class="mb-3">
+                            <label for="newsContent" class="form-label">News Content:</label>
+                            <textarea class="form-control" id="newsContent" rows="8" placeholder="Paste the news article content here..."></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newsUrl" class="form-label">Source URL (optional):</label>
+                            <input type="url" class="form-control" id="newsUrl" placeholder="https://...">
+                        </div>
+                        <div class="mb-3">
+                            <label for="summaryLength" class="form-label">Summary Length:</label>
+                            <select class="form-select" id="summaryLength">
+                                <option value="short">Short (100-150 words)</option>
+                                <option value="medium" selected>Medium (200-300 words)</option>
+                                <option value="long">Long (400-500 words)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="button" class="btn btn-primary w-100" id="generateBtn">Generate LinkedIn Post</button>
+                
+                <div class="loading" id="loadingIndicator">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p>Analyzing your writing style and generating content...</p>
+                    <p><small>This may take 30-60 seconds</small></p>
+                </div>
+                
+                <div class="error-message" id="errorMessage">
+                    An error occurred. Please try again.
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="card" id="resultsCard" style="display: none;">
+                    <div class="card-header">
+                        Generated LinkedIn Post
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <h5>Your Writing Style Profile</h5>
+                            <div class="style-profile" id="styleProfile">
+                                <!-- Style profile will be inserted here -->
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h5>Generated LinkedIn Post</h5>
+                            <div class="generated-post" id="generatedPost">
+                                <!-- Generated post will be inserted here -->
+                            </div>
+                            
+                            <div class="hashtags mb-2" id="hashtags">
+                                <!-- Hashtags will be inserted here -->
+                            </div>
+                            
+                            <div class="stats" id="postStats">
+                                <!-- Post stats will be inserted here -->
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-outline-primary w-100" id="copyBtn">
+                            Copy Post to Clipboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="static/js/api-connector.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generateBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const errorMessage = document.getElementById('errorMessage');
+            const resultsCard = document.getElementById('resultsCard');
+            
+            generateBtn.addEventListener('click', async () => {
+                // Get input values
+                const previousPosts = document.getElementById('previousPosts').value.trim();
+                const newsTitle = document.getElementById('newsTitle').value.trim();
+                const newsContent = document.getElementById('newsContent').value.trim();
+                const newsUrl = document.getElementById('newsUrl').value.trim();
+                const summaryLength = document.getElementById('summaryLength').value;
+                
+                // Validate inputs
+                if (!previousPosts) {
+                    alert('Please paste your previous LinkedIn posts for style analysis');
+                    return;
+                }
+                
+                if (!newsTitle || !newsContent) {
+                    alert('Please provide both a news title and content');
+                    return;
+                }
+                
+                // Show loading indicator
+                loadingIndicator.style.display = 'block';
+                generateBtn.disabled = true;
+                errorMessage.style.display = 'none';
+                resultsCard.style.display = 'none';
+                
+                try {
+                    // Prepare news content object
+                    const newsData = {
+                        title: newsTitle,
+                        content: newsContent,
+                        url: newsUrl || undefined,
+                        description: newsContent.substring(0, 150) + '...'
+                    };
+                    
+                    // Call the API to analyze and generate
+                    const result = await API.analyzeGenerateNews(previousPosts, newsData, summaryLength);
+                    
+                    // Process and display the result
+                    displayResults(result);
+                    
+                } catch (error) {
+                    console.error('Error generating post:', error);
+                    errorMessage.textContent = `Error: ${error.message || 'Something went wrong. Please try again.'}`;
+                    errorMessage.style.display = 'block';
+                } finally {
+                    // Hide loading indicator
+                    loadingIndicator.style.display = 'none';
+                    generateBtn.disabled = false;
+                }
+            });
+            
+            copyBtn.addEventListener('click', () => {
+                const content = document.getElementById('generatedPost').textContent;
+                navigator.clipboard.writeText(content)
+                    .then(() => {
+                        const originalText = copyBtn.textContent;
+                        copyBtn.textContent = 'Copied!';
+                        setTimeout(() => {
+                            copyBtn.textContent = originalText;
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy text: ', err);
+                        alert('Failed to copy to clipboard');
+                    });
+            });
+            
+            function displayResults(result) {
+                // Display style profile
+                const styleProfile = document.getElementById('styleProfile');
+                styleProfile.innerHTML = formatStyleProfile(result.style_profile);
+                
+                // Display generated post
+                const generatedPost = document.getElementById('generatedPost');
+                generatedPost.textContent = result.generated_post;
+                
+                // Display hashtags
+                const hashtagsEl = document.getElementById('hashtags');
+                hashtagsEl.innerHTML = '';
+                if (result.hashtags && result.hashtags.length > 0) {
+                    result.hashtags.forEach(tag => {
+                        const span = document.createElement('span');
+                        span.textContent = '#' + tag;
+                        hashtagsEl.appendChild(span);
+                    });
+                }
+                
+                // Calculate word count and read time
+                const wordCount = result.generated_post.split(/\s+/).length;
+                const readTime = Math.ceil(wordCount / 200) + ' min read'; // Assuming 200 words per minute reading speed
+                
+                // Display post stats
+                const postStats = document.getElementById('postStats');
+                postStats.innerHTML = 
+                    '<div>Word count: ' + wordCount + '</div>' +
+                    '<div>Read time: ' + readTime + '</div>' +
+                    '<div>Source: ' + (result.source || 'Custom news content') + '</div>';
+                
+                // Show results card
+                resultsCard.style.display = 'block';
+                
+                // Scroll to results
+                resultsCard.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            function formatStyleProfile(profile) {
+                if (!profile) return '<p>No style profile available</p>';
+                
+                let html = '<dl class="row">';
+                
+                for (const [key, value] of Object.entries(profile)) {
+                    const formattedKey = key.replace(/([A-Z])/g, ' $1')
+                        .replace(/^./, str => str.toUpperCase())
+                        .replace('_', ' ');
+                        
+                    html += `
+                        <dt class="col-sm-4">${formattedKey}</dt>
+                        <dd class="col-sm-8">${value}</dd>
+                    `;
+                }
+                
+                html += '</dl>';
+                return html;
+            }
+        });
+    </script>
+</body>
+</html>

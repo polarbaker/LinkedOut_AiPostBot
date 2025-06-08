@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Post Generator - AI-Powered Content Creation</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/improved-ui.css">
+    <link rel="stylesheet" href="static/css/microinteractions.css">
+    <link rel="stylesheet" href="static/css/progressive-disclosure.css">
+    <link rel="stylesheet" href="static/css/accessibility.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="container">
+                <div class="flex items-center justify-between">
+                    <div class="logo-section">
+                        <h1 class="logo-title">PostCraft AI</h1>
+                        <span class="logo-subtitle">LinkedIn Content Generator</span>
+                    </div>
+                    <div class="header-actions flex items-center gap-16">
+                        <button class="theme-toggle btn btn--outline btn--sm" id="themeToggle">
+                            <span id="themeIcon">🌙</span>
+                        </button>
+                        <div class="user-profile flex items-center gap-8">
+                            <div class="user-avatar">👤</div>
+                            <span class="user-name">Marketing Pro</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="app-nav">
+            <div class="container">
+                <div class="nav-tabs flex">
+                    <button class="nav-tab active" data-tab="voice-analysis" aria-controls="voice-analysis" role="tab" aria-selected="true">📝 Voice Analysis</button>
+                    <button class="nav-tab" data-tab="monitoring" aria-controls="monitoring" role="tab" aria-selected="false">🌐 Website Monitoring</button>
+                    <button class="nav-tab" data-tab="content-generation" aria-controls="content-generation" role="tab" aria-selected="false">🚀 Content Generation</button>
+                    <button class="nav-tab" data-tab="approval-queue" aria-controls="approval-queue" role="tab" aria-selected="false">✅ Approval Queue</button>
+                    <button class="nav-tab" data-tab="analytics" aria-controls="analytics" role="tab" aria-selected="false">📊 Analytics</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <div class="container">
+                <!-- Voice Analysis Section -->
+                <section id="voice-analysis" class="tab-content active">
+                    <div class="section-header">
+                        <h2>Voice Analysis & Style Profile</h2>
+                        <p class="section-description">Upload your previous LinkedIn posts to analyze your unique writing style and tone</p>
+                    </div>
+
+                    <div class="voice-analysis-grid">
+                        <div class="voice-input-section">
+                            <div class="card">
+                                <div class="card__header">
+                                    <h3>Input Your Previous Posts</h3>
+                                </div>
+                                <div class="card__body">
+                                    <div class="form-group">
+                                        <label class="form-label">Paste 3-5 of your previous LinkedIn posts:</label>
+                                        <textarea class="form-control" id="previousPosts" rows="8" placeholder="Paste your LinkedIn posts here, separated by line breaks..."></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Or upload a file:</label>
+                                        <input type="file" class="form-control" id="fileUpload" accept=".csv,.json,.txt">
+                                    </div>
+                                    <button class="btn btn--primary btn--full-width" id="analyzeStyle">
+                                        🔍 Analyze Writing Style
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="voice-results-section">
+                            <div class="card">
+                                <div class="card__header">
+                                    <h3>Style Analysis Results</h3>
+                                </div>
+                                <div class="card__body" id="analysisResults">
+                                    <div class="empty-state">
+                                        <p>Upload your posts to see your unique writing style analysis</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="style-profiles-section">
+                        <div class="card">
+                            <div class="card__header">
+                                <h3>Sample Style Profiles</h3>
+                                <p>Choose a profile that matches your style or create a custom one</p>
+                            </div>
+                            <div class="card__body">
+                                <div class="profiles-grid" id="styleProfiles"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Website Monitoring Section -->
+                <section id="monitoring" class="tab-content">
+                    <div class="section-header">
+                        <h2>Website Monitoring Hub</h2>
+                        <p class="section-description">Configure sources and browse the latest relevant articles for your LinkedIn content</p>
+                    </div>
+
+                    <div class="monitoring-controls">
+                        <div class="search-bar">
+                            <input type="text" id="articleSearch" class="form-control" placeholder="Search articles...">
+                            <button class="search-icon btn btn--icon">🔍</button>
+                        </div>
+                        
+                        <div class="filter-controls">
+                            <div class="filter-group">
+                                <select class="form-control" id="categoryFilter">
+                                    <option value="">All Categories</option>
+                                    <option value="Technology">Technology</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Leadership">Leadership</option>
+                                    <option value="AI">AI & Machine Learning</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <select class="form-control" id="sortFilter">
+                                    <option value="relevance">Sort by Relevance</option>
+                                    <option value="date">Sort by Date</option>
+                                    <option value="engagement">Sort by Engagement Potential</option>
+                                </select>
+                            </div>
+                            
+                            <button id="refreshArticles" class="btn btn--outline btn--sm">
+                                <span class="refresh-icon">🔄</span> Refresh Articles
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="content-tabs">
+                        <button class="content-tab active" data-content="articles">🗞️ Latest Articles</button>
+                        <button class="content-tab" data-content="sources">🌐 Manage Sources</button>
+                        <button class="content-tab" data-content="interests">🎯 Configure Interests</button>
+                    </div>
+
+                    <!-- Content Sections -->
+                    <div id="articlesContent" class="content-section active">
+                        <div class="articles-dashboard">
+                            <div class="articles-stats">
+                                <div class="stat-card">
+                                    <div class="stat-value" id="totalArticlesCount">0</div>
+                                    <div class="stat-label">Total Articles</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value" id="todayArticlesCount">0</div>
+                                    <div class="stat-label">Added Today</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value" id="highRelevanceCount">0</div>
+                                    <div class="stat-label">High Relevance</div>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="last-updated">Last Updated: <span id="lastUpdatedTime">Just now</span></span>
+                                    <span class="interest-match">Matched to interests: <span id="interestMatchCount">0</span></span>
+                                </div>
+                            </div>
+
+                            <div class="articles-grid" id="articlesGrid">
+                                <!-- Article cards will be dynamically inserted here -->
+                                <div class="article-skeleton" aria-hidden="true">
+                                    <div class="skeleton-header"></div>
+                                    <div class="skeleton-body"></div>
+                                    <div class="skeleton-footer"></div>
+                                </div>
+                                <div class="article-skeleton" aria-hidden="true">
+                                    <div class="skeleton-header"></div>
+                                    <div class="skeleton-body"></div>
+                                    <div class="skeleton-footer"></div>
+                                </div>
+                                <div class="article-skeleton" aria-hidden="true">
+                                    <div class="skeleton-header"></div>
+                                    <div class="skeleton-body"></div>
+                                    <div class="skeleton-footer"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sourcesContent" class="content-section">
+                        <div class="monitoring-grid">
+                            <div class="add-source-section">
+                                <div class="card">
+                                    <div class="card__header">
+                                        <h3>Add New Source</h3>
+                                    </div>
+                                    <div class="card__body">
+                                        <form id="addSourceForm">
+                                            <div class="form-group">
+                                                <label class="form-label">Website Name</label>
+                                                <input type="text" class="form-control" id="websiteName" placeholder="e.g., TechCrunch">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Website URL</label>
+                                                <input type="url" class="form-control" id="websiteUrl" placeholder="https://example.com">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">RSS Feed URL</label>
+                                                <input type="url" class="form-control" id="rssUrl" placeholder="https://example.com/feed">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Category</label>
+                                                <select class="form-control" id="category">
+                                                    <option value="Technology News">Technology News</option>
+                                                    <option value="Business Strategy">Business Strategy</option>
+                                                    <option value="AI & Machine Learning">AI & Machine Learning</option>
+                                                    <option value="Industry Insights">Industry Insights</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Check Frequency</label>
+                                                <select class="form-control" id="frequency">
+                                                    <option value="Every hour">Every hour</option>
+                                                    <option value="Every 2 hours">Every 2 hours</option>
+                                                    <option value="Every 6 hours">Every 6 hours</option>
+                                                    <option value="Daily">Daily</option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn--primary btn--full-width">
+                                                ➕ Add Source
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sources-list-section">
+                                <div class="card">
+                                    <div class="card__header">
+                                        <h3>Monitored Sources</h3>
+                                        <div class="card-actions">
+                                            <button id="bulkImport" class="btn btn--sm btn--outline">Import Sources</button>
+                                        </div>
+                                    </div>
+                                    <div class="card__body">
+                                        <div id="sourcesList" class="sources-list">
+                                            <!-- Sources will be listed here -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="interestsContent" class="content-section">
+                        <div class="interests-container">
+                            <div class="card">
+                                <div class="card__header">
+                                    <h3>Your Interest Profile</h3>
+                                    <p class="card-description">Set up your interests to improve article relevance scoring</p>
+                                </div>
+                                <div class="card__body">
+                                    <div class="interests-editor">
+                                        <div class="form-group">
+                                            <label class="form-label">Add interests (separated by commas)</label>
+                                            <div class="input-with-button">
+                                                <input type="text" id="interestInput" class="form-control" placeholder="e.g., AI, digital marketing, leadership">
+                                                <button id="addInterestBtn" class="btn btn--primary">Add</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="form-label">Your interests</label>
+                                            <div id="interestTags" class="interest-tags">
+                                                <!-- Interest tags will appear here -->
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="form-label">Boost terms (higher relevance scoring)</label>
+                                            <div class="input-with-button">
+                                                <input type="text" id="boostTermInput" class="form-control" placeholder="e.g., innovation, strategy">
+                                                <button id="addBoostBtn" class="btn btn--secondary">Add</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div id="boostTags" class="boost-tags">
+                                            <!-- Boost tags will appear here -->
+                                        </div>
+                                        
+                                        <button id="saveInterests" class="btn btn--primary btn--full-width">Save Interests Profile</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Content Generation Section -->
+                <section id="content-generation" class="tab-content">
+                    <div class="section-header">
+                        <h2>Content Generation Studio</h2>
+                        <p class="section-description">Create engaging LinkedIn posts from your selected articles</p>
+                    </div>
+
+                    <div class="generation-dashboard">
+                        <div class="article-selection-panel">
+                            <div class="panel-header">
+                                <h3>Select Article</h3>
+                                <div class="panel-actions">
+                                    <button class="btn btn--sm btn--outline" id="refreshContentSources">
+                                        <span class="refresh-icon">🔄</span> Refresh
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="panel-filters">
+                                <div class="filter-group compact">
+                                    <select class="form-control" id="sourceFilter">
+                                    <option value="all">All Sources</option>
+                                </select>
+                                </div>
+                                <div class="filter-group compact">
+                                    <select class="form-control" id="categoryContentFilter">
+                                        <option value="all">All Categories</option>
+                                        <option value="Technology">Technology</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Leadership">Leadership</option>
+                                        <option value="AI">AI & Machine Learning</option>
+                                    </select>
+                                </div>
+                                <div class="search-input compact">
+                                    <input type="text" class="form-control" id="contentSearch" placeholder="Search articles...">
+                                </div>
+                            </div>
+                            
+                            <div class="articles-scroll-container">
+                                <div class="articles-list" id="contentArticlesList">
+                                    <!-- Article list items will appear here -->
+                                    <div class="article-list-item article-skeleton" aria-hidden="true">
+                                        <div class="skeleton-title"></div>
+                                        <div class="skeleton-subtitle"></div>
+                                    </div>
+                                    <div class="article-list-item article-skeleton" aria-hidden="true">
+                                        <div class="skeleton-title"></div>
+                                        <div class="skeleton-subtitle"></div>
+                                    </div>
+                                    <div class="article-list-item article-skeleton" aria-hidden="true">
+                                        <div class="skeleton-title"></div>
+                                        <div class="skeleton-subtitle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="content-creation-panel">
+                            <div class="panel-header">
+                                <h3>Craft Your Post</h3>
+                                <div class="panel-actions">
+                                    <div class="engagement-score-container">
+                                        <span class="engagement-label">Engagement Score:</span>
+                                        <div class="engagement-meter">
+                                            <div class="meter-fill" style="width: 75%"></div>
+                                            <span class="meter-value">7.5</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="selected-article-preview" id="selectedArticlePreview">
+                                <div class="preview-placeholder">Select an article to create a post...</div>
+                                <!-- Selected article details will appear here -->
+                            </div>
+                            
+                            <div class="post-options">
+                                <div class="option-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Post Format</label>
+                                        <select class="form-control" id="postFormatSelect">
+                                            <option value="insight">Professional Insight</option>
+                                            <option value="question">Thought-Provoking Question</option>
+                                            <option value="story">Personal Story</option>
+                                            <option value="tips">Practical Tips</option>
+                                            <option value="news">Breaking News</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Tone</label>
+                                        <select class="form-control" id="postToneSelect">
+                                            <option value="professional">Professional</option>
+                                            <option value="conversational">Conversational</option>
+                                            <option value="enthusiastic">Enthusiastic</option>
+                                            <option value="thoughtful">Thoughtful</option>
+                                            <option value="authoritative">Authoritative</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="option-row">
+                                    <div class="form-group full-width">
+                                        <label class="form-label">Key points to emphasize (optional)</label>
+                                        <input type="text" class="form-control" id="keyPointsInput" placeholder="e.g., innovation, leadership insights, future trends">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="post-editor-container">
+                                <div class="editor-header">
+                                    <h4>Generated Post</h4>
+                                    <div class="editor-actions">
+                                        <button class="btn btn--sm btn--icon" title="Copy to clipboard">
+                                            <span class="icon">📋</span>
+                                        </button>
+                                        <button class="btn btn--sm btn--icon" id="regenerateBtn" title="Regenerate">
+                                            <span class="icon">🔄</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <textarea id="postContent" class="post-editor" placeholder="Your generated LinkedIn post will appear here..."></textarea>
+                                <div class="post-stats">
+                                    <div class="char-count">
+                                        <span id="currentChars">0</span> / <span id="maxChars">1200</span> characters
+                                    </div>
+                                    <div class="hashtag-count">
+                                        <span id="hashtagCount">0</span> hashtags
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="post-actions">
+                                <button id="generatePostBtn" class="btn btn--primary btn--lg">
+                                    <span class="icon">✨</span> Generate Post
+                                </button>
+                                <button id="saveAsDraftBtn" class="btn btn--outline">
+                                    <span class="icon">💾</span> Save as Draft
+                                </button>
+                                <button id="addToQueueBtn" class="btn btn--secondary">
+                                    <span class="icon">📅</span> Schedule Post
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Approval Queue Section -->
+                <section id="approval-queue" class="tab-content">
+                    <div class="section-header">
+                        <h2>Approval Queue</h2>
+                        <p class="section-description">Review, edit, and approve generated LinkedIn posts</p>
+                    </div>
+
+                    <div class="queue-stats">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-value" id="pendingCount">0</div>
+                                <div class="stat-label">Pending Approval</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="approvedCount">0</div>
+                                <div class="stat-label">Approved Today</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="avgEngagement">0</div>
+                                <div class="stat-label">Avg Engagement Score</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="approval-queue-list" id="approvalQueue"></div>
+                </section>
+
+                <!-- Analytics Section -->
+                <section id="analytics" class="tab-content">
+                    <div class="section-header">
+                        <h2>Analytics & Performance</h2>
+                        <p class="section-description">Track your content performance and style consistency</p>
+                    </div>
+
+                    <div class="analytics-grid">
+                        <div class="analytics-overview">
+                            <div class="analytics-cards">
+                                <div class="analytics-card">
+                                    <div class="analytics-icon">📈</div>
+                                    <div class="analytics-content">
+                                        <div class="analytics-value" id="totalPosts">47</div>
+                                        <div class="analytics-label">Posts Generated</div>
+                                    </div>
+                                </div>
+                                <div class="analytics-card">
+                                    <div class="analytics-icon">⭐</div>
+                                    <div class="analytics-content">
+                                        <div class="analytics-value" id="avgEngagementScore">8.3</div>
+                                        <div class="analytics-label">Avg Engagement Score</div>
+                                    </div>
+                                </div>
+                                <div class="analytics-card">
+                                    <div class="analytics-icon">🎯</div>
+                                    <div class="analytics-content">
+                                        <div class="analytics-value" id="styleConsistency">92%</div>
+                                        <div class="analytics-label">Style Consistency</div>
+                                    </div>
+                                </div>
+                                <div class="analytics-card">
+                                    <div class="analytics-icon">🏆</div>
+                                    <div class="analytics-content">
+                                        <div class="analytics-value" id="topFormat">Question Starter</div>
+                                        <div class="analytics-label">Top Format</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="source-performance">
+                            <div class="card">
+                                <div class="card__header">
+                                    <h3>Source Performance</h3>
+                                </div>
+                                <div class="card__body">
+                                    <div id="sourcePerformanceChart"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="posting-insights">
+                            <div class="card">
+                                <div class="card__header">
+                                    <h3>Best Posting Times</h3>
+                                </div>
+                                <div class="card__body">
+                                    <div class="best-time-display">
+                                        <div class="time-block">
+                                            <div class="time-value">9:00 AM</div>
+                                            <div class="time-label">Peak Engagement</div>
+                                        </div>
+                                        <div class="time-recommendations">
+                                            <h4>Recommended Times:</h4>
+                                            <ul>
+                                                <li>Tuesday 9:00 AM - 10:00 AM</li>
+                                                <li>Wednesday 2:00 PM - 3:00 PM</li>
+                                                <li>Thursday 11:00 AM - 12:00 PM</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Post Generation Modal -->
+        <div id="postGenerationModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Generate LinkedIn Post</h3>
+                    <button class="modal-close" id="closeModal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="generation-options">
+                        <div class="form-group">
+                            <label class="form-label">Post Format:</label>
+                            <select class="form-control" id="postFormat">
+                                <option value="Professional Insight">Professional Insight</option>
+                                <option value="Quick Update">Quick Update</option>
+                                <option value="Question Starter">Question Starter</option>
+                                <option value="Story Format">Story Format</option>
+                                <option value="Industry Analysis">Industry Analysis</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Style Profile:</label>
+                            <select class="form-control" id="styleProfileSelect">
+                                <option value="Professional Executive">Professional Executive</option>
+                                <option value="Casual Thought Leader">Casual Thought Leader</option>
+                                <option value="Tech Innovator">Tech Innovator</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="article-preview" id="articlePreview"></div>
+                    <div class="generated-post-preview">
+                        <h4>Generated Post Preview:</h4>
+                        <div class="post-preview-container">
+                            <textarea class="form-control generated-post-content" id="generatedPostContent" rows="12"></textarea>
+                            <div class="post-stats">
+                                <div class="char-count">
+                                    <span id="charCount">0</span> / 1200 characters
+                                </div>
+                                <div class="engagement-score">
+                                    Engagement Score: <span id="engagementPredict">8.5</span>/10
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn--outline" id="regeneratePost">🔄 Regenerate</button>
+                    <button class="btn btn--secondary" id="saveAsDraft">💾 Save as Draft</button>
+                    <button class="btn btn--primary" id="addToQueue">✅ Add to Queue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Overlay -->
+        <div id="modalOverlay" class="modal-overlay"></div>
+    </div>
+
+    <!-- Application JavaScript -->
+    <script src="static/js/api-connector.js"></script>
+    <script src="static/js/content-generation.js"></script>
+    <script src="static/js/app.js"></script>
+    <script src="static/js/scripts.js"></script>
+    <script src="static/js/enhanced-ui.js"></script>
+    <script src="static/js/progressive-disclosure.js"></script>
+    <script src="static/js/accessibility.js"></script>
+    <script src="static/js/notification-system.js"></script>
+    <script src="static/js/integration.js"></script>
+</body>
+</html>

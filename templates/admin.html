@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced LinkedIn Generator - Admin</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .status {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .status-indicator {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .on {
+            background-color: #2ecc71;
+        }
+        .off {
+            background-color: #e74c3c;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button.secondary {
+            background-color: #95a5a6;
+        }
+        button.secondary:hover {
+            background-color: #7f8c8d;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .hidden {
+            display: none;
+        }
+        .alert {
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enhanced LinkedIn Generator - Admin Dashboard</h1>
+        
+        <div id="message" class="alert hidden"></div>
+
+        <div class="card">
+            <h2>System Status</h2>
+            <div class="status">
+                <div id="systemStatusIndicator" class="status-indicator off"></div>
+                <div id="systemStatus">Checking...</div>
+            </div>
+            <div class="status">
+                <div id="mockModeIndicator" class="status-indicator off"></div>
+                <div id="mockModeStatus">Checking...</div>
+            </div>
+            <div class="status">
+                <div id="providerIndicator" class="status-indicator off"></div>
+                <div id="providerStatus">Checking...</div>
+            </div>
+            <button onclick="refreshStatus()">Refresh Status</button>
+        </div>
+
+        <div class="card">
+            <h2>Mode Settings</h2>
+            <div class="form-group">
+                <label for="mockModeToggle">Mock Mode:</label>
+                <select id="mockModeToggle">
+                    <option value="true">ON (Safe testing mode - no API keys needed)</option>
+                    <option value="false">OFF (Live mode - requires API keys)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="providerSelect">LLM Provider:</label>
+                <select id="providerSelect">
+                    <option value="mock">Mock (Testing only)</option>
+                    <option value="gemini">Google Gemini</option>
+                    <option value="openai">OpenAI</option>
+                </select>
+            </div>
+            <div id="apiKeyFields">
+                <div class="form-group">
+                    <label for="geminiApiKey">Google Gemini API Key:</label>
+                    <input type="text" id="geminiApiKey" placeholder="Enter API key">
+                </div>
+                <div class="form-group">
+                    <label for="openaiApiKey">OpenAI API Key:</label>
+                    <input type="text" id="openaiApiKey" placeholder="Enter API key">
+                </div>
+            </div>
+            <button onclick="saveSettings()">Save Settings</button>
+            <button class="secondary" onclick="resetToMockMode()">Reset to Safe Mode</button>
+        </div>
+
+        <div class="card">
+            <h2>Server Control</h2>
+            <button onclick="restartServer()">Restart Server</button>
+            <button class="secondary" onclick="location.href='/'">Go to Main App</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshStatus();
+            updateFormVisibility();
+
+            // Add change handler to mockModeToggle
+            document.getElementById('mockModeToggle').addEventListener('change', updateFormVisibility);
+        });
+
+        function updateFormVisibility() {
+            const mockMode = document.getElementById('mockModeToggle').value === 'true';
+            const apiKeyFields = document.getElementById('apiKeyFields');
+            const providerSelect = document.getElementById('providerSelect');
+            
+            if (mockMode) {
+                apiKeyFields.classList.add('hidden');
+                providerSelect.value = 'mock';
+                providerSelect.disabled = true;
+            } else {
+                apiKeyFields.classList.remove('hidden');
+                providerSelect.disabled = false;
+            }
+        }
+
+        function refreshStatus() {
+            fetch('/api/status')
+                .then(response => response.json())
+                .then(data => {
+                    // Update system status
+                    const systemStatusIndicator = document.getElementById('systemStatusIndicator');
+                    const systemStatus = document.getElementById('systemStatus');
+                    systemStatusIndicator.className = 'status-indicator on';
+                    systemStatus.textContent = 'System Online';
+
+                    // Update mock mode status
+                    const mockModeIndicator = document.getElementById('mockModeIndicator');
+                    const mockModeStatus = document.getElementById('mockModeStatus');
+                    mockModeIndicator.className = 'status-indicator ' + (data.mock_mode ? 'on' : 'off');
+                    mockModeStatus.textContent = 'Mock Mode: ' + (data.mock_mode ? 'Enabled' : 'Disabled');
+
+                    // Update provider status
+                    const providerIndicator = document.getElementById('providerIndicator');
+                    const providerStatus = document.getElementById('providerStatus');
+                    providerIndicator.className = 'status-indicator on';
+                    providerStatus.textContent = 'Active Provider: ' + data.provider;
+
+                    // Update form fields
+                    document.getElementById('mockModeToggle').value = data.mock_mode.toString();
+                    document.getElementById('providerSelect').value = data.provider;
+                    
+                    updateFormVisibility();
+                })
+                .catch(error => {
+                    console.error('Error fetching status:', error);
+                    // Show error status
+                    document.getElementById('systemStatusIndicator').className = 'status-indicator off';
+                    document.getElementById('systemStatus').textContent = 'Error connecting to server';
+                });
+        }
+
+        function saveSettings() {
+            const mockMode = document.getElementById('mockModeToggle').value === 'true';
+            const provider = document.getElementById('providerSelect').value;
+            const geminiApiKey = document.getElementById('geminiApiKey').value;
+            const openaiApiKey = document.getElementById('openaiApiKey').value;
+
+            // Validate inputs if not in mock mode
+            if (!mockMode) {
+                if (provider === 'gemini' && !geminiApiKey) {
+                    showMessage('Gemini API key is required when using Gemini provider', 'danger');
+                    return;
+                }
+                if (provider === 'openai' && !openaiApiKey) {
+                    showMessage('OpenAI API key is required when using OpenAI provider', 'danger');
+                    return;
+                }
+            }
+
+            const data = {
+                mock_mode: mockMode,
+                provider: provider,
+                gemini_api_key: geminiApiKey,
+                openai_api_key: openaiApiKey
+            };
+
+            fetch('/api/settings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Server error');
+                }
+                return response.json();
+            })
+            .then(data => {
+                showMessage('Settings saved successfully. Server will restart.', 'success');
+                setTimeout(() => {
+                    refreshStatus();
+                }, 3000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showMessage('Failed to save settings. Check server logs.', 'danger');
+            });
+        }
+
+        function resetToMockMode() {
+            document.getElementById('mockModeToggle').value = 'true';
+            document.getElementById('providerSelect').value = 'mock';
+            updateFormVisibility();
+            showMessage('Reset to safe mock mode. Click Save Settings to apply.', 'success');
+        }
+
+        function restartServer() {
+            fetch('/api/restart', {
+                method: 'POST',
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Server error');
+                }
+                showMessage('Server restart initiated. Please wait...', 'success');
+                setTimeout(() => {
+                    refreshStatus();
+                }, 5000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showMessage('Failed to restart server', 'danger');
+            });
+        }
+
+        function showMessage(message, type) {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = message;
+            messageElement.className = 'alert alert-' + type;
+            messageElement.classList.remove('hidden');
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                messageElement.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+/**
+ * Progressive Disclosure CSS
+ * Styling for progressive disclosure elements and states
+ */
+
+/* Hidden elements - base state */
+.disclosure-hidden {
+  display: none !important;
+}
+
+/* Elements that can be disclosed */
+[data-disclosure-group] {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Newly disclosed elements animation */
+.disclosed {
+  animation: disclosure-reveal 0.4s ease-out forwards;
+}
+
+@keyframes disclosure-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Progressive display of items in a list */
+[data-disclosure-group].sequential-item {
+  opacity: 0;
+}
+
+[data-disclosure-group].sequential-item.disclosed {
+  opacity: 1;
+}
+
+/* "Show more" button styles */
+.disclosure-more-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 8px 16px;
+  margin-top: 16px;
+  background-color: var(--color-light-bg, #f5f5f5);
+  border: 1px solid var(--color-border, #ddd);
+  border-radius: 4px;
+  color: var(--color-secondary, #555);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.disclosure-more-btn:hover {
+  background-color: var(--color-bg-hover, #e9e9e9);
+  color: var(--color-primary, #0077b5);
+}
+
+.disclosure-more-btn .disclosure-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  padding: 0 6px;
+  background-color: var(--color-accent, #0077b5);
+  border-radius: 10px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Feature highlight */
+.feature-highlight {
+  position: relative;
+}
+
+.feature-highlight::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 2px solid var(--color-accent, #0077b5);
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+.feature-highlight.highlighted::after {
+  opacity: 1;
+  animation: pulse-outline 2s infinite;
+}
+
+@keyframes pulse-outline {
+  0% { box-shadow: 0 0 0 0 rgba(0, 119, 181, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(0, 119, 181, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 119, 181, 0); }
+}
+
+/* User level indicators */
+.user-level-content {
+  position: relative;
+}
+
+.user-level-content::before {
+  content: attr(data-level-label);
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  padding: 2px 6px;
+  background-color: var(--color-accent-light, #e1f0fa);
+  border: 1px solid var(--color-accent, #0077b5);
+  border-radius: 4px;
+  color: var(--color-accent, #0077b5);
+  font-size: 10px;
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Tooltips for disclosure elements */
+[data-disclosure-tooltip] {
+  position: relative;
+}
+
+[data-disclosure-tooltip]:hover::after {
+  content: attr(data-disclosure-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 100;
+}
+
+[data-disclosure-tooltip]:hover::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(0, 0, 0, 0.8);
+  margin-bottom: 2px;
+  z-index: 100;
+}
+
+/* Guided tour focus */
+.tour-focus-container {
+  position: relative;
+  z-index: 1;
+}
+
+.tour-spotlight {
+  position: relative;
+  z-index: 10;
+}
+
+.tour-spotlight::after {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+.tour-instructions {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 20px;
+  padding: 12px 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 300px;
+  z-index: 1000;
+}
+
+.tour-instructions h4 {
+  margin: 0 0 8px;
+  color: var(--color-primary, #0077b5);
+}
+
+.tour-instructions p {
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+
+.tour-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Accessibility styles for hidden elements that should be accessible to screen readers */
+.sr-only-disclosure {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Form field validation state styling */
+.disclosure-form-field.invalid-field {
+  border-color: var(--color-error, #dc3545) !important;
+}
+
+.disclosure-form-field.valid-field {
+  border-color: var(--color-success, #28a745) !important;
+}
+
+/* Progressive disclosure for longer text content */
+.text-truncate-disclosure {
+  position: relative;
+  max-height: 4.5em; /* Approx 3 lines of text */
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.text-truncate-disclosure.disclosed {
+  max-height: 1000px; /* Large enough to show all content */
+}
+
+.text-truncate-disclosure::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 24px;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  transition: opacity 0.3s ease;
+}
+
+.text-truncate-disclosure.disclosed::after {
+  opacity: 0;
+}
+
+/* Read more button for truncated text */
+.read-more-btn {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--color-primary, #0077b5);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.read-more-btn:hover {
+  text-decoration: underline;
+}

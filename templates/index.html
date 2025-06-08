@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced LinkedIn Generator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .status-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-online {
+            background-color: #2ecc71;
+        }
+        .status-offline {
+            background-color: #e74c3c;
+        }
+        .button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+            margin-top: 20px;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+        .button.secondary {
+            background-color: #95a5a6;
+        }
+        .button.secondary:hover {
+            background-color: #7f8c8d;
+        }
+        .feature-list {
+            margin-top: 30px;
+            padding: 0;
+            list-style-type: none;
+        }
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .feature-list li:before {
+            content: "✓";
+            color: #2ecc71;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .mock-badge {
+            background-color: #f39c12;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .api-badge {
+            background-color: #9b59b6;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enhanced LinkedIn Generator</h1>
+        
+        <div class="status-card">
+            <div id="statusContainer">
+                <span class="status-indicator status-online"></span>
+                <strong>System Status:</strong> <span id="systemStatus">Checking...</span>
+                <span id="mockBadge" class="mock-badge hidden">MOCK MODE</span>
+            </div>
+            <div id="providerContainer" style="margin-top: 10px;">
+                <strong>Active Provider:</strong> <span id="providerStatus">Checking...</span>
+            </div>
+        </div>
+        
+        <p>
+            Welcome to the Enhanced LinkedIn Generator! This application uses AI to analyze your writing style and create personalized LinkedIn content based on monitored websites and RSS feeds.
+        </p>
+        
+        <h3>Quick Start</h3>
+        <p>
+            The easiest way to get started is to use the admin panel to configure your settings. You can start in mock mode (no API keys needed) and switch to live mode when you're ready.
+        </p>
+        
+        <div style="margin: 30px 0;">
+            <a href="/admin" class="button">Open Admin Panel</a>
+            <a href="/health" class="button secondary">Check System Health</a>
+        </div>
+        
+        <h3>Key Features</h3>
+        <ul class="feature-list">
+            <li>Voice Analysis Engine for personalized style matching</li>
+            <li>Website Monitoring for your favorite content sources</li>
+            <li>AI Content Generation with Google Gemini and OpenAI</li>
+            <li>Approval Workflow for content quality control</li>
+            <li>Mock Mode for testing without API keys</li>
+        </ul>
+    </div>
+
+    <script>
+        // Check system status on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/api/status')
+                .then(response => response.json())
+                .then(data => {
+                    // Update system status
+                    document.getElementById('systemStatus').textContent = data.system_status === 'online' ? 'Online' : 'Offline';
+                    
+                    // Update mock mode badge
+                    const mockBadge = document.getElementById('mockBadge');
+                    if (data.mock_mode) {
+                        mockBadge.textContent = 'MOCK MODE';
+                        mockBadge.style.display = 'inline';
+                    } else {
+                        mockBadge.style.display = 'none';
+                    }
+                    
+                    // Update provider status
+                    const providerStatus = document.getElementById('providerStatus');
+                    providerStatus.textContent = data.provider.charAt(0).toUpperCase() + data.provider.slice(1);
+                    
+                    // Add API badge if not in mock mode
+                    if (!data.mock_mode) {
+                        const apiBadge = document.createElement('span');
+                        apiBadge.className = 'api-badge';
+                        apiBadge.textContent = 'LIVE API';
+                        providerStatus.appendChild(apiBadge);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching status:', error);
+                    document.getElementById('systemStatus').textContent = 'Error';
+                    document.getElementById('providerStatus').textContent = 'Unknown';
+                });
+        });
+    </script>
+</body>
+</html>
