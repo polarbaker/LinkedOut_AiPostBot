@@ -1516,3 +1516,196 @@ select.form-control {
   outline: var(--focus-outline);
   outline-offset: 2px;
 }
+
+/* Onboarding Modal Enhancements */
+.onboarding-container {
+    display: flex; /* Helps with centering if needed */
+    align-items: center;
+    justify-content: center;
+}
+
+.onboarding-modal {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 700px; /* Adjust as needed */
+    width: 90%;
+    margin: 20px auto; /* Centering the modal */
+    overflow: hidden; /* Ensures child elements don't break border-radius */
+}
+
+.onboarding-header {
+    padding: 20px 25px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    position: relative; /* For close button positioning */
+}
+
+.onboarding-brand {
+    /* This div contains the logo and brand name. */
+    /* The screenshot shows 'LinkedIn Post Generator' as a small title at the top. */
+    margin-bottom: 10px;
+}
+
+.onboarding-logo {
+    display: none; /* Hidden as per screenshot */
+}
+
+.onboarding-brand-name {
+    font-size: 1rem; /* Smaller title at the top */
+    color: var(--text-secondary, #555);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.onboarding-title {
+    font-size: 1.75rem; /* 'Welcome to your content assistant!' */
+    color: var(--text-primary, #333);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.onboarding-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary, #777);
+    margin-bottom: 15px;
+}
+
+.onboarding-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary, #888);
+    cursor: pointer;
+}
+
+.onboarding-content {
+    padding: 25px;
+}
+
+.progress-indicator {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px; /* Increased spacing */
+}
+
+.progress-step {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #e0e0e0; /* Inactive step color */
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+}
+
+.progress-step.active {
+    background-color: var(--primary-color, #007bff); /* Active step color */
+}
+
+.step-content .step-illustration {
+    text-align: center;
+    margin-bottom: 25px;
+    min-height: 100px; /* Provides space if image is missing, adjust as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-content .step-illustration img {
+    max-width: 100%;
+    max-height: 150px; /* Constrain image height */
+    object-fit: contain;
+}
+
+.welcome-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive 2-column grid */
+    gap: 20px;
+}
+
+.welcome-feature {
+    background-color: #f9f9f9; /* Light background for feature cards */
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start; /* Align icon and text content to the top */
+    gap: 15px; /* Space between icon and content */
+}
+
+.welcome-feature-icon {
+    font-size: 1.8rem; /* Icon size */
+    color: var(--primary-color, #007bff);
+    margin-top: 2px; /* Slight adjustment for alignment */
+}
+
+.welcome-feature-content h4 {
+    font-size: 1.1rem;
+    color: var(--text-primary, #333);
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.welcome-feature-content p {
+    font-size: 0.9rem;
+    color: var(--text-secondary, #555);
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+.onboarding-footer {
+    padding: 20px 25px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fdfdfd;
+}
+
+.footer-left,
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.skip-onboarding {
+    background: none;
+    border: none;
+    color: var(--text-secondary, #555);
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.skip-onboarding:hover {
+    text-decoration: underline;
+}
+
+.step-counter {
+    font-size: 0.9rem;
+    color: var(--text-secondary, #777);
+}
+
+/* Ensure buttons in footer have some margin if defaults are too tight */
+.onboarding-footer .btn {
+    padding: 8px 18px;
+    font-size: 0.95rem;
+}
+
+/* Styles for empty steps to maintain layout consistency */
+.onboarding-step:empty::before {
+    content: 'Setup step content will appear here.';
+    display: block;
+    text-align: center;
+    font-style: italic;
+    color: #aaa;
+    padding: 50px 20px;
+    min-height: 200px; /* Ensure modal doesn't collapse too much */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
