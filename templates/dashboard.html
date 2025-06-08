@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Post Generator — Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/improved-ui.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboards.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/microinteractions.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/onboarding.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/progressive-disclosure.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/accessibility.css') }}">
+</head>
+<body>
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
+    
+    <div class="app-container">
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-logo">LP</div>
+                <h1 class="brand-name">LinkedIn Post Generator</h1>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn--icon" id="notificationsBtn" aria-label="Notifications">
+                    <span class="icon notification-indicator">🔔</span>
+                </button>
+                <button class="btn btn--icon" id="accessibilityBtn" aria-label="Accessibility options">
+                    <span class="icon">♿</span>
+                </button>
+                <button class="btn btn--icon" id="settingsBtn" aria-label="Settings">
+                    <span class="icon">⚙️</span>
+                </button>
+                <div class="user-profile-mini">
+                    <div class="user-avatar-small">TB</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-container" id="main-content">
+            <!-- Dashboard Sidebar -->
+            <aside class="dashboard-sidebar">
+                <div class="nav-menu">
+                    <div class="nav-section">
+                        <h3 class="nav-section-title">Main</h3>
+                        <a href="#overview" class="nav-item active" data-tab="overview" role="tab" aria-controls="overview" aria-selected="true">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-label">Overview</span>
+                        </a>
+                        <a href="#content-hub" class="nav-item" data-tab="content-hub" role="tab" aria-controls="content-hub" aria-selected="false">
+                            <span class="nav-icon">📰</span>
+                            <span class="nav-label">Content Hub</span>
+                        </a>
+                        <a href="#post-studio" class="nav-item" data-tab="post-studio" role="tab" aria-controls="post-studio" aria-selected="false">
+                            <span class="nav-icon">✏️</span>
+                            <span class="nav-label">Post Studio</span>
+                        </a>
+                    </div>
+                    
+                    <div class="nav-section">
+                        <h3 class="nav-section-title">Management</h3>
+                        <a href="#schedule" class="nav-item" data-tab="schedule" role="tab" aria-controls="schedule" aria-selected="false">
+                            <span class="nav-icon">📅</span>
+                            <span class="nav-label">Schedule</span>
+                        </a>
+                        <a href="#analytics" class="nav-item" data-tab="analytics" role="tab" aria-controls="analytics" aria-selected="false">
+                            <span class="nav-icon">📈</span>
+                            <span class="nav-label">Analytics</span>
+                        </a>
+                        <a href="#voice-profile" class="nav-item" data-tab="voice-profile" role="tab" aria-controls="voice-profile" aria-selected="false">
+                            <span class="nav-icon">🎥</span>
+                            <span class="nav-label">Voice Profile</span>
+                        </a>
+                    </div>
+
+                    <div class="nav-section">
+                        <h3 class="nav-section-title">Settings</h3>
+                        <a href="#sources" class="nav-item" data-tab="sources" role="tab" aria-controls="sources" aria-selected="false">
+                            <span class="nav-icon">🔗</span>
+                            <span class="nav-label">Content Sources</span>
+                        </a>
+                        <a href="#integrations" class="nav-item" data-tab="integrations" role="tab" aria-controls="integrations" aria-selected="false">
+                            <span class="nav-icon">🔐</span>
+                            <span class="nav-label">API Keys</span>
+                        </a>
+                        <a href="#preferences" class="nav-item" data-tab="preferences" role="tab" aria-controls="preferences" aria-selected="false">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-label">Preferences</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="user-profile">
+                    <div class="user-card">
+                        <div class="user-avatar">TB</div>
+                        <div class="user-info">
+                            <div class="user-name">Thomas Baker</div>
+                            <div class="user-plan">Pro Plan</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Dashboard Main Content -->
+            <main class="dashboard-main">
+                <!-- Overview Tab -->
+                <section id="overview" class="dashboard-tab active" role="tabpanel" aria-labelledby="overview-tab">
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <div class="dashboard-title-icon">📊</div>
+                            <h2>Dashboard Overview</h2>
+                        </div>
+                        <div class="dashboard-actions">
+                            <button class="btn btn--outline btn--sm">
+                                <span class="icon">🔄</span> Refresh Data
+                            </button>
+                            <button class="btn btn--primary btn--sm">
+                                <span class="icon">✨</span> Create New Post
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-content">
+                        <div class="welcome-card dashboard-card">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Welcome back, Thomas!</h3>
+                                    <p class="card-subtitle">Here's your LinkedIn content performance at a glance</p>
+                                </div>
+                            </div>
+                            <div class="quick-actions">
+                                <button class="btn">
+                                    <span class="icon">✏️</span> Create New Post
+                                </button>
+                                <button class="btn">
+                                    <span class="icon">🔍</span> Explore Content
+                                </button>
+                                <button class="btn">
+                                    <span class="icon">📅</span> View Schedule
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-grid">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <div>
+                                        <h3 class="card-title">Articles Monitored</h3>
+                                        <p class="card-subtitle">Total relevant articles</p>
+                                    </div>
+                                    <div class="card-icon">📰</div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-value">128</div>
+                                    <div class="card-progress">
+                                        <div class="progress-bar" style="width: 75%;"></div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="card-trend trend-up">
+                                        <span class="icon">↑</span> 12% from last week
+                                    </div>
+                                    <div class="card-date">Updated 2 hours ago</div>
+                                </div>
+                            </div>
+                            
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <div>
+                                        <h3 class="card-title">Posts Created</h3>
+                                        <p class="card-subtitle">Total LinkedIn posts</p>
+                                    </div>
+                                    <div class="card-icon">✏️</div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-value">42</div>
+                                    <div class="card-progress">
+                                        <div class="progress-bar" style="width: 60%;"></div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="card-trend trend-up">
+                                        <span class="icon">↑</span> 8% from last month
+                                    </div>
+                                    <div class="card-date">Last post: Yesterday</div>
+                                </div>
+                            </div>
+                            
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <div>
+                                        <h3 class="card-title">Average Engagement</h3>
+                                        <p class="card-subtitle">Per post performance</p>
+                                    </div>
+                                    <div class="card-icon">👍</div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-value">24.6</div>
+                                    <div class="card-progress">
+                                        <div class="progress-bar" style="width: 80%;"></div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="card-trend trend-up">
+                                        <span class="icon">↑</span> 15% improvement
+                                    </div>
+                                    <div class="card-date">Based on last 10 posts</div>
+                                </div>
+                            </div>
+                            
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <div>
+                                        <h3 class="card-title">Profile Views</h3>
+                                        <p class="card-subtitle">LinkedIn profile visits</p>
+                                    </div>
+                                    <div class="card-icon">👁️</div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-value">189</div>
+                                    <div class="card-progress">
+                                        <div class="progress-bar" style="width: 65%;"></div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="card-trend trend-up">
+                                        <span class="icon">↑</span> 22% increase
+                                    </div>
+                                    <div class="card-date">Last 30 days</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Recent Activity</h3>
+                                    <p class="card-subtitle">Your latest content and interactions</p>
+                                </div>
+                                <button class="btn btn--sm btn--outline">View All</button>
+                            </div>
+                            <div class="card-content">
+                                <table class="activity-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Activity</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Engagement</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="activity-type">
+                                                    <div class="activity-icon">📝</div>
+                                                    <div class="activity-details">
+                                                        <div class="activity-title">The Future of AI in Marketing</div>
+                                                        <div class="activity-meta">Post created from article</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Yesterday</td>
+                                            <td><span class="activity-status status-published">Published</span></td>
+                                            <td>32 interactions</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="activity-type">
+                                                    <div class="activity-icon">📅</div>
+                                                    <div class="activity-details">
+                                                        <div class="activity-title">5 Leadership Lessons from Tech CEOs</div>
+                                                        <div class="activity-meta">Scheduled post</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>June 10, 2025</td>
+                                            <td><span class="activity-status status-scheduled">Scheduled</span></td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="activity-type">
+                                                    <div class="activity-icon">✏️</div>
+                                                    <div class="activity-details">
+                                                        <div class="activity-title">Digital Transformation Strategies</div>
+                                                        <div class="activity-meta">Draft post</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>June 5, 2025</td>
+                                            <td><span class="activity-status status-draft">Draft</span></td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="activity-type">
+                                                    <div class="activity-icon">📰</div>
+                                                    <div class="activity-details">
+                                                        <div class="activity-title">New sources added</div>
+                                                        <div class="activity-meta">3 technology blogs</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>June 3, 2025</td>
+                                            <td><span class="activity-status status-info">Complete</span></td>
+                                            <td>12 new articles</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Other tabs would go here, similar structure -->
+                <section id="content-hub" class="dashboard-tab" role="tabpanel" aria-labelledby="content-hub-tab">
+                    <!-- Content Hub tab content -->
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <div class="dashboard-title-icon">📰</div>
+                            <h2>Content Hub</h2>
+                        </div>
+                        <div class="dashboard-actions">
+                            <button class="btn btn--outline btn--sm">
+                                <span class="icon">🔍</span> Filter
+                            </button>
+                            <button class="btn btn--primary btn--sm">
+                                <span class="icon">🔄</span> Refresh Articles
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="post-studio" class="dashboard-tab" role="tabpanel" aria-labelledby="post-studio-tab">
+                    <!-- Post Studio tab content -->
+                    <div class="dashboard-header">
+                        <div class="dashboard-title">
+                            <div class="dashboard-title-icon">✏️</div>
+                            <h2>Post Studio</h2>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Additional tabs would follow the same pattern -->
+            </main>
+        </div>
+        
+        <!-- Toast notification container -->
+        <div class="toast-container" id="toastContainer"></div>
+    </div>
+    
+    <!-- Onboarding Experience -->
+    <div class="onboarding-container" id="onboardingContainer">
+        <div class="onboarding-modal">
+            <div class="onboarding-header">
+                <div class="onboarding-brand">
+                    <div class="onboarding-logo">LP</div>
+                    <div class="onboarding-brand-name">LinkedIn Post Generator</div>
+                </div>
+                <h2 class="onboarding-title">Welcome to your content assistant!</h2>
+                <p class="onboarding-subtitle">Let's set up your experience in just a few steps</p>
+                <button class="onboarding-close" id="closeOnboarding" aria-label="Close onboarding">✕</button>
+            </div>
+            
+            <div class="onboarding-content">
+                <div class="progress-indicator">
+                    <div class="progress-step active"></div>
+                    <div class="progress-step"></div>
+                    <div class="progress-step"></div>
+                    <div class="progress-step"></div>
+                </div>
+                
+                <div class="onboarding-steps" style="transform: translateX(0%);">
+                    <!-- Step 1: Welcome -->
+                    <div class="onboarding-step">
+                        <div class="step-content">
+                            <div class="step-illustration">
+                                <img src="{{ url_for('static', filename='img/onboarding-welcome.svg') }}" alt="Welcome illustration" />
+                            </div>
+                            
+                            <div class="welcome-features">
+                                <div class="welcome-feature">
+                                    <div class="welcome-feature-icon">📰</div>
+                                    <div class="welcome-feature-content">
+                                        <h4>Content Discovery</h4>
+                                        <p>Automatically discover relevant industry content from your favorite sources</p>
+                                    </div>
+                                </div>
+                                <div class="welcome-feature">
+                                    <div class="welcome-feature-icon">🎯</div>
+                                    <div class="welcome-feature-content">
+                                        <h4>Voice Matching</h4>
+                                        <p>Generate content that matches your authentic professional voice</p>
+                                    </div>
+                                </div>
+                                <div class="welcome-feature">
+                                    <div class="welcome-feature-icon">✏️</div>
+                                    <div class="welcome-feature-content">
+                                        <h4>Post Creation</h4>
+                                        <p>Create engaging posts with various formats and tones</p>
+                                    </div>
+                                </div>
+                                <div class="welcome-feature">
+                                    <div class="welcome-feature-icon">📊</div>
+                                    <div class="welcome-feature-content">
+                                        <h4>Analytics</h4>
+                                        <p>Track performance and optimize your LinkedIn engagement</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional steps would be defined here -->
+                </div>
+            </div>
+            
+            <div class="onboarding-footer">
+                <div class="footer-left">
+                    <button class="skip-onboarding" id="skipOnboarding">Skip setup</button>
+                    <div class="step-counter">Step <span id="currentStep">1</span> of 4</div>
+                </div>
+                <div class="footer-right">
+                    <button class="btn btn--outline" id="prevStepBtn">Back</button>
+                    <button class="btn btn--primary" id="nextStepBtn">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/api-connector.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/content-generation.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/enhanced-ui.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/onboarding.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/notification-system.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/progressive-disclosure.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/accessibility.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/integration.js') }}"></script>
+</body>
+</html>

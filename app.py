@@ -310,6 +310,11 @@ def generator_page():
     """Serves the main Direct News Generator page."""
     return render_template('direct-news.html')
 
+@app.route('/dashboard', methods=['GET'])
+def main_dashboard():
+    """Serves the main application dashboard."""
+    return render_template('dashboard.html')
+
 @app.route('/api/status', methods=['GET'])
 def get_status():
     """Get current application status"""
